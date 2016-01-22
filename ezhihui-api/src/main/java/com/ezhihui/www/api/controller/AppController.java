@@ -2,7 +2,6 @@ package com.ezhihui.www.api.controller;
 
 import com.ezhihui.www.domain.App;
 import com.ezhihui.www.response.BaseResponse;
-//import com.ezhihui.www.service.IAppService;
 import com.ezhihui.www.service.IAppService;
 import com.ezhihui.www.service.impl.AppServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
