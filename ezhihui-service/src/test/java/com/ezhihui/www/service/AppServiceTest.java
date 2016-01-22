@@ -1,10 +1,8 @@
-package com.ezhi.www.service;
+package com.ezhihui.www.service;
 
 import com.ezhihui.www.domain.App;
 import com.ezhihui.www.response.BaseResponse;
-import com.ezhihui.www.service.IAppService;
 import junit.framework.Assert;
-import org.aspectj.lang.annotation.Before;
 import org.junit.Test;
 
 /**

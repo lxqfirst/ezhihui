@@ -1,4 +1,4 @@
-package com.ezhi.www.service;
+package com.ezhihui.www.service;
 
 import org.junit.Before;
 import org.springframework.context.ApplicationContext;
