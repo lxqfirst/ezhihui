@@ -14,7 +14,6 @@
 
     <modules>
         <module>ezhihui-api</module>
-        <module>ezhihui-dao</module>
         <module>ezhihui-service</module>
         <module>ezhihui-common</module>
     </modules>
@@ -64,9 +63,15 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>jsp-api</artifactId>
-                <version>2.2.1-b03</version>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.3.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
