@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ezhihui.www.dao.TeacherGradeCostDAO">
+    <resultMap id="BaseResultMap" type="com.ezhihui.www.domain.TeacherGradeCost">
+        <result column="teacher_id" property="teacherId" jdbcType="INTEGER"/>
+        <result column="grade_id" property="gradeId" jdbcType="INTEGER"/>
+        <result column="cost" property="cost" jdbcType="DOUBLE"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.ezhihui.www.domain.TeacherGradeCost">
+    insert into tb_teacher_grade_cost (teacher_id, grade_id, cost
+      )
+    values (#{teacherId,jdbcType=INTEGER}, #{gradeId,jdbcType=INTEGER}, #{cost,jdbcType=DOUBLE}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ezhihui.www.domain.TeacherGradeCost">
+        insert into tb_teacher_grade_cost
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teacherId != null">
+                teacher_id,
+            </if>
+            <if test="gradeId != null">
+                grade_id,
+            </if>
+            <if test="cost != null">
+                cost,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teacherId != null">
+                #{teacherId,jdbcType=INTEGER},
+            </if>
+            <if test="gradeId != null">
+                #{gradeId,jdbcType=INTEGER},
+            </if>
+            <if test="cost != null">
+                #{cost,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+</mapper>
