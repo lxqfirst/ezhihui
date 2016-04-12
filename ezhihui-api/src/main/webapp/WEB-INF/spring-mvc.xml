@@ -35,6 +35,8 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+    <mvc:resources location="/assets/" mapping="/assets/**" />
+
     <!-- 文件上传 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="UTF-8"/>
