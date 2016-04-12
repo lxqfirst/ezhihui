@@ -16,17 +16,6 @@
         <div class="collapse navbar-collapse"
              id="bs-example-navbar-collapse-1">
 
-            <ul class="nav navbar-nav">
-                <li class="dropdown"><a href="#" class="dropdown-toggle"
-                                        data-toggle="dropdown" role="button" aria-haspopup="true"
-                                        aria-expanded="false">在线视频<span class="caret"> </span>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="${contextPath}/broadcast/view">直播间管理</a></li>
-                    </ul>
-                </li>
-            </ul>
-
             <!--右边导航栏-->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"> hello,<span id="username"></span> </a></li>

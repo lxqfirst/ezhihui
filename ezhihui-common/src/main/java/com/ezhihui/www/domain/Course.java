@@ -31,4 +31,14 @@ public class Course {
     private String startTimeStr;
 
     private String endTimeStr;
+
+    private String studentName;
+
+    private String teacherName;
+
+    private String subjectName;
+
+    private String signString;
+
+    private Long gradeId;
 }

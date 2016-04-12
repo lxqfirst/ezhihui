@@ -90,4 +90,17 @@
       subject_id = #{subjectId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="getByCondi" resultMap="BaseResultMap" parameterType="com.ezhihui.www.domain.Teacher">
+        SELECT
+        tb_teacher.*, tb_subject.subject_name
+        FROM
+        tb_teacher,
+        tb_subject
+        WHERE
+        tb_teacher.subject_id = tb_subject.id
+        <if test="name != null">
+            AND NAME LIKE CONCAT('%', '${name}', '%')
+        </if>
+    </select>
 </mapper>
