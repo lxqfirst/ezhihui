@@ -1,5 +1,6 @@
 package com.ezhihui.www.api.controller;
 
+import com.ezhihui.www.api.view.CourseView;
 import com.ezhihui.www.domain.BatchStudent;
 import com.ezhihui.www.domain.Course;
 import com.ezhihui.www.response.BaseResponse;
@@ -12,6 +13,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -85,5 +87,12 @@ public class CourseController extends BaseController {
     @ResponseBody
     public BaseResponse<Integer> deleteById(@RequestParam("id") Integer id) {
         return this.courseService.deleteById(id);
+    }
+
+    @RequestMapping(value = "/exportCourse", method = RequestMethod.GET)
+    public ModelAndView exportDrivers(@ModelAttribute Course course) {
+        List<Course> courseList = this.courseService.getList(course).getData().getItems();
+        CourseView view = new CourseView();
+        return new ModelAndView(view, "courseList", courseList);
     }
 }

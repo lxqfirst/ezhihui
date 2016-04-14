@@ -296,5 +296,23 @@ var course = {
         params += "&dateStr=" + dateText;
         comJs.post("/course/copy?" + params, null, "拷贝成功", false);
         course.createList();
+    },
+
+    download: function () {
+        var status = $("#query-status").attr("menu-value");
+        if (status === undefined || status == -1) {
+            status = "";
+        }
+        var ss = {
+            "startTimeStr": $('#start_time_input').val(),
+            "endTimeStr": $('#end_time_input').val(),
+            "studentId": course.getStudentId('student'),
+            "teacherId": course.getTeacherId('teacher'),
+            "status": status
+        };
+
+        window.location.href = "/course/exportCourse?startTimeStr=" + ss.startTimeStr
+            + "&endTimeStr=" + ss.endTimeStr + "&studentId=" + ss.studentId + "&teacherId=" + ss.teacherId
+            + "&status=" + status;
     }
 }
