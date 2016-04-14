@@ -242,9 +242,13 @@
                        table_url="${contextPath}/course/getList">
                     <thead>
                     <tr>
-                        <th id='order' style="text-align:center;">#</th>
+                        <th id='checkbox' style="text-align:center;">
+                            <input type="checkbox" id="checkAll" class="check" onchange="course.checkAll()"/>
+                        </th>
                         <th id='studentName' style="text-align:center;">学生</th>
-                        <th id='teacherName' style="text-align:center;">教师</th>
+                        <th id='teacherName' sty
+                            le="text-align:center;">教师
+                        </th>
                         <th id='subjectName' style="text-align:center;">科目</th>
                         <th id='courseTime' style="text-align:center;">时长</th>
                         <th id='time' style="text-align:center;" data-options="comJs.formmatDate">上课时间</th>

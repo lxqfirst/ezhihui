@@ -60,11 +60,11 @@ var course = {
         });
     },
 
-    initStudentWithoutHttp : function(id){
+    initStudentWithoutHttp: function (id) {
         course.autoComplete(id, studentList);
     },
 
-    initTeacherWithoutHttp :function(id){
+    initTeacherWithoutHttp: function (id) {
         course.autoComplete(id, teacherList);
     },
 
@@ -173,9 +173,9 @@ var course = {
 
     transStatus: function (status) {
         if (status == 0) {
-            return "<img src='/assets/images/fail.png' style='width:16px' title='已见到'/>";
+            return "<img src='/assets/images/fail.png' style='width:16px' title='未签到'/>";
         } else {
-            return "<img src='/assets/images/ok.png' style='width:16px' title='已见到'/>";
+            return "<img src='/assets/images/ok.png' style='width:16px' title='已签到'/>";
         }
 
     },
@@ -186,5 +186,29 @@ var course = {
         }
 
         return classroom;
+    },
+
+    checkAll: function () {
+        //全部选择
+        if ($('#checkAll').prop('checked')) {
+            $.each($('.check'), function (n, value) {
+                $(value).prop('checked', true);
+            });
+        } else {
+            $.each($('.check'), function (n, value) {
+                $(value).prop('checked', false);
+            });
+        }
+    },
+
+    deleteCourse: function ($a) {
+        var confirm_msg = "删除后将无法恢复！";
+        if (!window.confirm(confirm_msg)) {
+            return false;
+        }
+        var id = $a.parent().parent()[0].id;
+
+        comJs.post("/course/deleteById?id=" + parseInt(id), null, "删除成功", false);
+        course.createList();
     }
 }

@@ -56,7 +56,7 @@ var comJs = {
         var opTd = '<td style="text-align:center;">';
         opTd += '<a onclick = signInCourse($(this)) title="签到">签到</a>&nbsp;&nbsp;&nbsp' +
             '<a onclick = editCourse($(this)) title="编辑">编辑</a>&nbsp;&nbsp;&nbsp' +
-            '<a onclick = deleteCourse($(this)) title="删除">删除</a>';
+            '<a onclick = course.deleteCourse($(this)) title="删除">删除</a>';
         opTd += '</td>';
         return opTd;
     },
@@ -321,6 +321,8 @@ var comJs = {
                                 tr += "<td style='text-align:center;'>" + (n + 1) + "</td>";
                             } else if (fieldName == 'course-operation') {
                                 tr += comJs.appendOpForCourse();
+                            } else if (fieldName == 'checkbox') {
+                                tr += "<td style='text-align:center;'>" + '<input type="checkbox" id = check' + value.id + ' class="check"/>' + "</td>";
                             } else {
                                 tr += "<td style='text-align:center;'>" + fieldVal + "</td>";
                             }

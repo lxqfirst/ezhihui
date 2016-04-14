@@ -79,4 +79,11 @@ public class CourseController extends BaseController {
     public BaseResponse<Boolean> download() {
         return new BaseResponse<>(Boolean.TRUE);
     }
+
+
+    @RequestMapping(value = "/deleteById", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse<Integer> deleteById(@RequestParam("id") Integer id) {
+        return this.courseService.deleteById(id);
+    }
 }
