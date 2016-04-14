@@ -2,6 +2,8 @@ package com.ezhihui.www.dao;
 
 import com.ezhihui.www.domain.Student;
 
+import java.util.List;
+
 public interface StudentDAO {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface StudentDAO {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
+    List<Student> getByCondi(Student student);
 }

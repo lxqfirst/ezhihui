@@ -16,6 +16,7 @@
           rel="stylesheet">
     <link href="${contextPath}/assets/css/daterangepicker-bs3.css"
           rel="stylesheet" type="text/css" media="all"/>
+    <link href="${contextPath}/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="all">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media
             queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file://
@@ -35,27 +36,34 @@
     <script src="${contextPath}/assets/js/bootstrap3-typeahead.js"></script>
     <!-- 时间控件 -->
     <script src="${contextPath}/assets/js/moment.js"></script>
-    <script src="${contextPath}/assets/js/daterangepicker.js"></script>
+    <script src="${contextPath}/assets/js/bootstrap-datetimepicker.js"></script>
+    <script src="${contextPath}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="${contextPath}/assets/js/course/course.js"></script>
+    <script src="${contextPath}/assets/js/valid/valid.js"></script>
     <!-- 当前页js -->
     <script>
         $(document).ready(function () {
-            $('#reservation').daterangepicker(null, function (start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
+            //初始化时间控件
+            $('.date').datetimepicker({
+                language: 'zh-CN',
+                weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                forceParse: 0,
+                showMeridian: 1
             });
+            $('#start_time_input').val(new Date().Format("yyyy-MM-dd") + " 08:00:00");
+            $('#end_time_input').val(new Date().Format("yyyy-MM-dd") + " 23:00:00");
 
-            var ss = {
-                "pageSize": 10
-            };
-            comJs.setParams(ss);
-            comJs.createTable(1);
-            $("#broadcastManager").addClass('active');
-            course.initTeacher();
+            course.createList();
+            course.initTeacher("teacher");
+            course.initTeacherWithoutHttp("teacherNew");
+            course.initStudent("student");
+            course.initStudentWithoutHttp("studentNew");
 
-            //function parseLocalArrayData() {
-
-            //}
-
+            $("#courseManager").addClass('active');
         });
     </script>
 </head>
@@ -64,7 +72,7 @@
 <c:import url="/views/template/head.jsp"></c:import>
 <div class="row-fluid ">
     <!--左侧导航栏-->
-    <c:import url="/views/template/broadcastleft.jsp"></c:import>
+    <c:import url="/views/template/left.jsp"></c:import>
     <!--右侧内容面板-->
     <div class="col-md-10">
         <h3>
@@ -78,31 +86,61 @@
                     <!-- /.col-lg-4 -->
                     <div class="col-lg-4">
                         <div class="input-group">
-                            <span class="input-group-addon">直播日期</span>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="input-prepend input-group">
-											<span class="add-on input-group-addon"> <i
-                                                    class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-											</span> <input type="text" name="reservation" id="reservation"
-                                                           class="form-control" value=""/>
-                                    </div>
-                                </div>
+                            <span class="input-group-addon">开始时间</span>
+                            <div id="start_time" class="input-group date" data-date-format="yyyy-mm-dd hh:ii">
+                                <input class="form-control" type="text" value="" id="start_time_input">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                             </div>
                         </div>
                     </div>
-                    <!-- /.col-lg-6 -->
                     <div class="col-lg-4">
                         <div class="input-group">
-                            <span class="input-group-addon"> 嘉宾名称 </span> <input
-                                type="text" class="form-control" id="guestNameCondi"
-                                aria-label="...">
+                            <span class="input-group-addon">结束时间</span>
+                            <div id="end_time" class="input-group date" data-date-format="yyyy-mm-dd hh:ii">
+                                <input class="form-control" type="text" value="" id="end_time_input">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"> 状态 </span>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button"
+                                        id="query-status" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="true" menu-value menu-text>
+                                    全部 <span class="caret"> </span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a onclick="comJs.menuOnclick(this)" attrid="-1">全部</a></li>
+                                    <li><a onclick="comJs.menuOnclick(this)" attrid="0">未签到</a></li>
+                                    <li><a onclick="comJs.menuOnclick(this)" attrid="1">已签到</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+                </div>
+                <div class="clearfix" style="margin-bottom: 10px;"></div>
+                <!-- 清除浮动 给row之间增加间隔-->
+                <!-- /.row -->
+                <div class="row">
+                    <!-- /.col-lg-6 -->
+                    <div class="col-lg-3">
+                        <div class="input-group">
+                            <span class="input-group-addon"> 学生 </span>
+                            <input id="student" autocomplete="off" data-provide="typeahead" type="text"
+                                   class="form-control" placeholder=""/>
+
                         </div>
                         <!-- /input-group -->
                     </div>
 
                     <!-- /.col-lg-6 -->
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="input-group">
                             <span class="input-group-addon"> 教师 </span>
                             <input id="teacher" autocomplete="off" data-provide="typeahead" type="text"
@@ -112,54 +150,9 @@
                         <!-- /input-group -->
                     </div>
                     <!-- /.col-lg-6 -->
-                </div>
-                <div class="clearfix" style="margin-bottom: 10px;"></div>
-                <!-- 清除浮动 给row之间增加间隔-->
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="input-group">
-                            <span class="input-group-addon"> 直播状态 </span>
-                            <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button"
-                                        id="query-status" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="true" menu-value menu-text>
-                                    全部 <span class="caret"> </span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a onclick="comJs.menuOnclick(this)">全部</a></li>
-                                    <li><a onclick="comJs.menuOnclick(this)" attrid="1">正在直播</a></li>
-                                    <li><a onclick="comJs.menuOnclick(this)" attrid="0">直播预告</a></li>
-                                    <li><a onclick="comJs.menuOnclick(this)" attrid="2">直播结束</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /input-group -->
-                    </div>
-                    <!-- /.col-lg-4 -->
-                    <div class="col-lg-4">
-                        <div class="input-group">
-                            <span class="input-group-addon"> 上线状态 </span>
-                            <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button"
-                                        id="query-online" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="true" menu-value menu-text>
-                                    全部 <span class="caret"> </span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a onclick="comJs.menuOnclick(this)">全部</a></li>
-                                    <li><a onclick="comJs.menuOnclick(this)" attrid="0">上线</a></li>
-                                    <li><a onclick="comJs.menuOnclick(this)" attrid="1">下线</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /input-group -->
-                    </div>
 
-                    <!-- /.col-lg-6 -->
                 </div>
                 <!-- /.row -->
-
 
                 <div class="clearfix" style="margin-bottom: 10px;"></div>
                 <!-- 清除浮动增加面板间间隔 -->
@@ -168,7 +161,7 @@
                         <div>
                             <button type="button" class="btn btn-info"
                                     aria-label="Left Align"
-                                    onclick="">
+                                    onclick="course.createList()">
 									<span class="glyphicon glyphicon-search" aria-hidden="true">
 									</span> 检索
                             </button>
@@ -178,9 +171,59 @@
                         <div>
                             <button type="button" class="btn btn-info"
                                     aria-label="Right Align"
-                                    onclick="BroadcastManager.createView()">
+                                    onclick="course.showCreateCourseView()">
 									<span class="glyphicon glyphicon-plus" aria-hidden="true">
 									</span> 新建
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div>
+                            <button type="button" class="btn btn-info"
+                                    aria-label="Right Align"
+                                    onclick="BroadcastManager.createView()">
+									<span class="glyphicon glyphicon-download" aria-hidden="true">
+									</span> 下载
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div>
+                            <button type="button" class="btn btn-info"
+                                    aria-label="Right Align"
+                                    onclick="BroadcastManager.createView()">
+									<span class="glyphicon glyphicon-copy" aria-hidden="true">
+									</span> 复制
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div>
+                            <button type="button" class="btn btn-info"
+                                    aria-label="Right Align"
+                                    onclick="course.setToday()">
+									<span class="glyphicon glyphicon-calendar" aria-hidden="true">
+									</span> 今天
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div>
+                            <button type="button" class="btn btn-info"
+                                    aria-label="Right Align"
+                                    onclick="course.setTomorrow()">
+									<span class="glyphicon glyphicon-calendar" aria-hidden="true">
+									</span> 明天
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div>
+                            <button type="button" class="btn btn-info"
+                                    aria-label="Right Align"
+                                    onclick="BroadcastManager.createView()">
+									<span class="glyphicon glyphicon-star" aria-hidden="true">
+									</span> 批量
                             </button>
                         </div>
                     </div>
@@ -199,8 +242,15 @@
                        table_url="${contextPath}/course/getList">
                     <thead>
                     <tr>
-                        <th id='order'>#</th>
-                        <th id='studentName'>直播时间</th>
+                        <th id='order' style="text-align:center;">#</th>
+                        <th id='studentName' style="text-align:center;">学生</th>
+                        <th id='teacherName' style="text-align:center;">教师</th>
+                        <th id='subjectName' style="text-align:center;">科目</th>
+                        <th id='courseTime' style="text-align:center;">时长</th>
+                        <th id='time' style="text-align:center;" data-options="comJs.formmatDate">上课时间</th>
+                        <th id='classroom' style="text-align:center;" data-options="course.transClassroom">教室</th>
+                        <th id='status' style="text-align:center;" data-options="course.transStatus">状态</th>
+                        <th id="course-operation" style="text-align:center;">操作</th>
                     </tr>
                     </thead>
                     <tbody id='com_tbody'>
@@ -224,10 +274,78 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"
                             aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">默认值</h4>
+                    <h4 class="modal-title" id="myModalLabel">课程设置</h4>
+                </div>
+
+                <div class="panel-info">
+                    <div class="bootstrap-admin-panel-content">
+                        <div class="row">
+                            <!-- /.col-lg-4 -->
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">上课时间</span>
+                                    <div id="" class="input-group date" data-date-format="yyyy-mm-dd hh:ii">
+                                        <input class="form-control" type="text" value="" id="timeNew" required
+                                               message="上课时间">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-th"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix" style="margin-bottom: 10px;"></div>
+
+                        <div class="row">
+                            <!-- /.col-lg-6 -->
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 学生 </span>
+                                    <input id="studentNew" autocomplete="off" data-provide="typeahead" type="text"
+                                           class="form-control" placeholder="" required message="学生"/>
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+                            <!-- /.col-lg-6 -->
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 教师 </span>
+                                    <input id="teacherNew" autocomplete="off" data-provide="typeahead" type="text"
+                                           class="form-control" placeholder="" required message="教师"/>
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+                        </div>
+
+                        <div class="clearfix" style="margin-bottom: 10px;"></div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 时长 </span>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="courseTimeNew"
+                                           aria-label="..." required message="时长">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 教室 </span>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="classroomNew"
+                                           aria-label="...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix" style="margin-bottom: 10px;"></div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">确认</button>
+                    <button type="button" class="btn btn-primary" onclick="course.createCourse(0)">保存并关闭</button>
+                    <button type="button" class="btn btn-info" onclick="course.createCourse(1)">保存并继续</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消
                     </button>
                 </div>

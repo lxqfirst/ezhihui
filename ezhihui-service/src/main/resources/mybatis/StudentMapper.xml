@@ -125,4 +125,12 @@
       desc = #{desc,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="getByCondi" resultMap="BaseResultMap" parameterType="com.ezhihui.www.domain.Student">
+        <!-- select * from tb_student where name like CONCAT('%','${name}','%' )-->
+        SELECT
+        tb_student.* , tb_grade.grade_name
+        FROM tb_student,tb_grade
+        WHERE tb_grade.id = tb_student.grade and name like CONCAT('%','${name}','%' )
+    </select>
 </mapper>

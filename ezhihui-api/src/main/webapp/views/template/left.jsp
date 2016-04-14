@@ -5,7 +5,7 @@
 	<!--左侧导航栏-->
 	<div class="col-md-2">
 		<div class="list-group">
-			<a href="${contextPath}/broadcast/view" class="list-group-item" id="broadcastManager">直播间管理</a>
+			<a href="${contextPath}/broadcast/view" class="list-group-item" id="courseManager">课程管理</a>
 		</div>
 	</div>
 </body>

@@ -6,11 +6,17 @@ import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.response.PageListResponse;
 import com.ezhihui.www.service.ICourseService;
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +24,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/course")
+@Slf4j
 public class CourseController extends BaseController {
     @Autowired
     private ICourseService courseService;
@@ -31,6 +38,13 @@ public class CourseController extends BaseController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public BaseResponse<Integer> create(@RequestBody Course course) {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            Date date = sf.parse(course.getTimeStr());
+            course.setTime(date);
+        } catch (ParseException e) {
+            log.error("time error" + course.getTimeStr());
+        }
         return this.courseService.create(course);
     }
 

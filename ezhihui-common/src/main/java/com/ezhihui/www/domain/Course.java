@@ -20,6 +20,8 @@ public class Course {
 
     private Date time;
 
+    private String timeStr;
+
     private String classroom;
 
     private Date addTime;

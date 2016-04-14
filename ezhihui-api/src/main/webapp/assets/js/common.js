@@ -24,9 +24,9 @@ function alert(msg, flag) {
         animation: 'RotateX',
         confirmButtonClass: 'btn-info',
         confirmButton: '确认',
-        confirm: function () {
-            eval(methodName);// 刷新当前页面
-        }
+        //confirm: function () {
+        //    eval(methodName);// 刷新当前页面
+        //}
     });
 }
 
@@ -52,27 +52,15 @@ var comJs = {
      *
      * @returns {String}
      */
-    appendOpForBusiness: function () {
-        var opTd = '<td> <div class="btn-group">';
-        opTd += '<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">操作<span class="caret"></span></button>';
-        opTd += '<ul class="dropdown-menu">'
-        opTd += '<li><a href="#" onclick="businessQueryJs.getDetail($(this),'// 商家详情
-        opTd += "'/business/updateView'";
-        opTd += ')">详情</a></li>'// 商家详情end
-        opTd += '<li><a onclick="businessQueryJs.getDetail($(this),'// 充值明细
-        opTd += "'/trade/chargeDetailView'";
-        opTd += ')">充值明细</a></li>'// 充值明细end
-        opTd += '<li><a onclick="businessQueryJs.getDetail($(this),'// 消费明细
-        opTd += "'/trade/consumerDetailView'";
-        opTd += ')">消费明细</a></li>'// 消费明细end
-        /*opTd += '<li><a onclick="businessQueryJs.getDetail($(this),'// 收款明细
-         opTd += "'/trade/collectionDetailView'";
-         opTd += ')">收款明细</a></li>'// 收款明细end*/
-        opTd += '<li><a onclick="businessQueryJs.getConfirm($(this))">激活/禁用</a></li></ul>';
-        opTd += '</div></td>';
+    appendOpForCourse: function () {
+        var opTd = '<td style="text-align:center;">';
+        opTd += '<a onclick = signInCourse($(this)) title="签到">签到</a>&nbsp;&nbsp;&nbsp' +
+            '<a onclick = editCourse($(this)) title="编辑">编辑</a>&nbsp;&nbsp;&nbsp' +
+            '<a onclick = deleteCourse($(this)) title="删除">删除</a>';
+        opTd += '</td>';
         return opTd;
     },
-    /**
+    /*
      * 格式化时间
      */
     formmatDate: function (gmtTime) {
@@ -89,8 +77,8 @@ var comJs = {
             : datetime.getMinutes();
         var second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds()
             : datetime.getSeconds();
-        return year + "-" + month + "-" + date + " " + hour + ":" + minute
-            + ":" + second;
+        return year + "-" + month + "-" + date + " " + hour + ":" + minute;
+        //+ ":" + second;
     },
 
     formmatNum: function (num) {
@@ -219,6 +207,10 @@ var comJs = {
             type: 'get',
             success: function (data) {
                 if (data.code == 0) {
+                    if (data.data === null) {
+                        $("#page_table #com_tbody").empty();
+                        return
+                    }
                     comJs.getTable(data.data.items);
                     comJs.getPage(data.data);
                 } else {
@@ -274,7 +266,7 @@ var comJs = {
             .each(
                 data,
                 function (n, value) {
-                    var tr = "<tr>";
+                    var tr = "<tr id='" + value.id + "'>";
                     ths
                         .each(function () {
                             var dataOptions = $(this).attr(
@@ -326,11 +318,11 @@ var comJs = {
                                 fieldVal = "无";
                             }
                             if (fieldName == 'order') {
-                                tr += "<td>" + (n + 1) + "</td>";
-                            } else if (fieldName == 'operation-businessQuery') {
-                                tr += comJs.appendOpForBusiness();
+                                tr += "<td style='text-align:center;'>" + (n + 1) + "</td>";
+                            } else if (fieldName == 'course-operation') {
+                                tr += comJs.appendOpForCourse();
                             } else {
-                                tr += "<td>" + fieldVal + "</td>";
+                                tr += "<td style='text-align:center;'>" + fieldVal + "</td>";
                             }
                         });
                     tr += "</tr>";
@@ -480,4 +472,42 @@ var comJs = {
         return timeFmt;
     },
 
+    post: function (url, param, message, async) {
+        var aj = $.ajax({
+            url: url,
+            type: 'post',
+            contentType: "application/json",
+            dataType: 'json',
+            async: async,
+            data: JSON.stringify(param),
+            success: function (data) {
+                if (data.code == 0) {
+                    alert(message, 0);
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+    },
+}
+
+Date.prototype.Format = function (fmt) {
+    var o = {
+        "M+": this.getMonth() + 1,                 //月份
+        "d+": this.getDate(),                    //日
+        "h+": this.getHours(),                   //小时
+        "m+": this.getMinutes(),                 //分
+        "s+": this.getSeconds(),                 //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds()             //毫秒
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
 }
