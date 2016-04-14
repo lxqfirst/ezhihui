@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>直播间管理</title>
+    <title>课程管理</title>
     <!-- Bootstrap -->
     <link href="${contextPath}/assets/css/bootstrap.min.css"
           rel="stylesheet">
@@ -77,7 +77,7 @@
     <div class="col-md-10">
         <h3>
 				<span class="glyphicon glyphicon-align-left" aria-hidden="true">
-				</span> 直播间管理
+				</span> 课程管理
         </h3>
         <!--检索面板-->
         <div class="panel panel-info">
@@ -235,7 +235,7 @@
         <div class="panel panel-default" id="com_list_msg"></div>
         <!--table面板-->
         <div class="panel panel-info">
-            <div class="panel-heading">直播间列表</div>
+            <div class="panel-heading">课程列表</div>
             <div class="bootstrap-admin-panel-content">
 
                 <table class="table table-bordered" id="page_table"
