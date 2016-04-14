@@ -13,6 +13,11 @@ var teacherMap = {};
 var studentList = [];
 var studentMap = {};
 
+/**
+ * 当前更新的课程Id
+ */
+var currentCourseId;
+
 var course = {
     initTeacher: function (id) {
         var url = "/teacher/getList";
@@ -127,6 +132,9 @@ var course = {
     },
 
     showCreateCourseView: function () {
+        $('#updateButton').hide();
+        $('#createButton').show();
+        $('#continueButton').show();
         $('#myModal').modal('show');
     },
 
@@ -153,22 +161,41 @@ var course = {
             "courseTime": $('#courseTimeNew').val(),
             "timeStr": $('#timeNew').val(),
             "classroom": $('#classroomNew').val()
-        }
+        };
 
         comJs.post("/course/create", param, "课程新建成功", false);
+        course.clearModel();
         course.createList();
-        $('#courseTimeNew').val('');
-        $('#timeNew').val('');
-        $('#studentNew').val('');
-        $('#teacherNew').val('');
-        $('#classroomNew').val('');
         if (flag == 0) {
             $('#myModal').modal('hide');
         }
     },
 
-    updateCourse: function () {
+    clearModel: function () {
+        $('#courseTimeNew').val('2');
+        $('#timeNew').val('');
+        $('#studentNew').val('');
+        $('#teacherNew').val('');
+        $('#classroomNew').val('');
+    },
 
+    updateCourse: function () {
+        if (!validJs.triggerValid()) {
+            return;
+        }
+
+        var param = {
+            "id": currentCourseId,
+            "studentId": course.getStudentId('studentNew'),
+            "teacherId": course.getTeacherId('teacherNew'),
+            "courseTime": $('#courseTimeNew').val(),
+            "timeStr": $('#timeNew').val(),
+            "classroom": $('#classroomNew').val()
+        };
+        comJs.post("/course/update", param, "课程更新成功", false);
+        course.clearModel();
+        course.createList();
+        $('#myModal').modal('hide');
     },
 
     transStatus: function (status) {
@@ -226,10 +253,26 @@ var course = {
         }
 
         comJs.post("/course/update", param, "操作成功", false);
-        if(param.status == 1){
-            $a.parent().prev().children()[0].src='/assets/images/ok.png';
-        }else{
-            $a.parent().prev().children()[0].src='/assets/images/fail.png';
+        if (param.status == 1) {
+            $a.parent().prev().children()[0].src = '/assets/images/ok.png';
+        } else {
+            $a.parent().prev().children()[0].src = '/assets/images/fail.png';
         }
+    },
+
+    showEditView: function ($a) {
+        $('#courseTimeNew').val($a.parent().parent().children()[4].innerHTML);
+        $('#timeNew').val($a.parent().parent().children()[5].innerHTML);
+        $('#studentNew').val($a.parent().parent().children()[1].innerHTML);
+        $('#teacherNew').val($a.parent().parent().children()[2].innerHTML);
+
+        if ($a.parent().parent().children()[6].innerHTML != "-")
+            $('#classroomNew').val($a.parent().parent().children()[6].innerHTML);
+        currentCourseId = $a.parent().parent()[0].id;
+
+        $('#updateButton').show();
+        $('#createButton').hide();
+        $('#continueButton').hide();
+        $('#myModal').modal('show');
     }
 }

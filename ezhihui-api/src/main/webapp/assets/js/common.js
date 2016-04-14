@@ -55,7 +55,7 @@ var comJs = {
     appendOpForCourse: function () {
         var opTd = '<td style="text-align:center;">';
         opTd += '<a onclick = course.signInCourse($(this)) title="签到">签到</a>&nbsp;&nbsp;&nbsp' +
-            '<a onclick = editCourse($(this)) title="编辑">编辑</a>&nbsp;&nbsp;&nbsp' +
+            '<a onclick = course.showEditView($(this)) title="编辑">编辑</a>&nbsp;&nbsp;&nbsp' +
             '<a onclick = course.deleteCourse($(this)) title="删除">删除</a>';
         opTd += '</td>';
         return opTd;

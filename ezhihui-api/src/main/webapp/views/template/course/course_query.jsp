@@ -331,7 +331,7 @@
                                     <input type="text"
                                            class="form-control"
                                            id="courseTimeNew"
-                                           aria-label="..." required message="时长">
+                                           aria-label="..." required message="时长" value="2">
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -348,8 +348,15 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="course.createCourse(0)">保存并关闭</button>
-                    <button type="button" class="btn btn-info" onclick="course.createCourse(1)">保存并继续</button>
+                    <button type="button" class="btn btn-primary" onclick="course.createCourse(0)" id="createButton">
+                        保存并关闭
+                    </button>
+                    <button type="button" class="btn btn-info" onclick="course.createCourse(1)" id="continueButton">
+                        保存并继续
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="course.updateCourse()" id="updateButton">
+                        保存并关闭
+                    </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消
                     </button>
                 </div>
