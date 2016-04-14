@@ -35,7 +35,8 @@ public class CourseServiceImpl implements ICourseService {
 
     @Override
     public BaseResponse<Integer> update(Course course) {
-        course.setEndTime(DateUtils.addMinutes(course.getTime(), (int) (course.getCourseTime() * 60)));
+        if (course.getTime() != null && course.getCourseTime() != null)
+            course.setEndTime(DateUtils.addMinutes(course.getTime(), (int) (course.getCourseTime() * 60)));
         int rows = this.courseDAO.updateByPrimaryKeySelective(course);
         return new BaseResponse<>(rows);
     }

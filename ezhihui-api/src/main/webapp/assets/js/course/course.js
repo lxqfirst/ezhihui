@@ -210,5 +210,26 @@ var course = {
 
         comJs.post("/course/deleteById?id=" + parseInt(id), null, "删除成功", false);
         course.createList();
+    },
+
+    signInCourse: function ($a) {
+        var id = $a.parent().parent()[0].id;
+        var src = $a.parent().prev().children()[0].src;
+        var param = {
+            id: parseInt(id)
+        };
+
+        if (src.endsWith('fail.png')) {
+            param.status = 1;
+        } else {
+            param.status = 0;
+        }
+
+        comJs.post("/course/update", param, "操作成功", false);
+        if(param.status == 1){
+            $a.parent().prev().children()[0].src='/assets/images/ok.png';
+        }else{
+            $a.parent().prev().children()[0].src='/assets/images/fail.png';
+        }
     }
 }
