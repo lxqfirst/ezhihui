@@ -56,7 +56,7 @@ public class CourseServiceImpl implements ICourseService {
                 Date date = course.getTime();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
-                calendar.set(Integer.parseInt(dateStr.split("-")[0]), Integer.parseInt(dateStr.split("-")[1]), Integer.parseInt(dateStr.split("-")[2]));
+                calendar.set(Integer.parseInt(dateStr.split("-")[0]), Integer.parseInt(dateStr.split("-")[1]) - 1, Integer.parseInt(dateStr.split("-")[2]));
 
                 course.setTime(calendar.getTime());
                 course.setId(null);

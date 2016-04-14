@@ -274,5 +274,27 @@ var course = {
         $('#createButton').hide();
         $('#continueButton').hide();
         $('#myModal').modal('show');
+    },
+
+    copy: function () {
+        var date = new Date();
+        var dateText = prompt("确定复制时间", date.Format("yyyy-MM-dd"));
+
+        var params = 'ids='
+        var ids = '';
+        $.each($('.check'), function (n, value) {
+            if ($(value).prop('checked') == true && value.id != "checkAll") {
+                ids += "|" + value.id.substring(5);
+            }
+            $(value).prop('checked', false);
+        });
+        if (ids == "") {
+            alert("请选择复制的课程");
+            return;
+        }
+        params += ids.substring(1);
+        params += "&dateStr=" + dateText;
+        comJs.post("/course/copy?" + params, null, "拷贝成功", false);
+        course.createList();
     }
 }

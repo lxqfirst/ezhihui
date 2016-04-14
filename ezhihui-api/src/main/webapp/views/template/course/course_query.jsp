@@ -191,7 +191,7 @@
                         <div>
                             <button type="button" class="btn btn-info"
                                     aria-label="Right Align"
-                                    onclick="BroadcastManager.createView()">
+                                    onclick="course.copy()">
 									<span class="glyphicon glyphicon-copy" aria-hidden="true">
 									</span> 复制
                             </button>
