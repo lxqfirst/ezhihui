@@ -91,7 +91,7 @@
                         <div>
                             <button type="button" class="btn btn-info"
                                     aria-label="Right Align"
-                                    onclick="course.showCreateCourseView()">
+                                    onclick="batchManager.saveBatchCourse()">
 									<span class="glyphicon glyphicon-save" aria-hidden="true">
 									</span> 保存
                             </button>

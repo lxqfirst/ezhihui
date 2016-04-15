@@ -165,6 +165,9 @@ var batchManager = {
 
         var param = "studentId=" + studentId + "&startTimeStr=" + todayStr + "&endTimeStr=" + sevenDayLaterStr;
         var result = comJs.getSync("/course/getList?" + param);
+        if (result == null)
+            return;
+
         var courseList = result.items;
         var info = '<div id="courseComment"><label>其他时间课程:</label><br>';
 
@@ -188,6 +191,62 @@ var batchManager = {
         info += '</div>';
         $('#comment').append(info);
 
+    },
+
+    saveBatchCourse: function () {
+        if (studentMap[$('#student').val()] === undefined) {
+            alert("请输入学生姓名");
+            return;
+        }
+        var studentId = studentMap[$('#student').val()].id;
+
+        var newCourseList = new Array();
+        var deletedCourseList = new Array();
+        var updatedCourseList = new Array();
+
+        $.each($('.student_auto'), function (n, value) {
+            if (oldCourseMap[value.id] != undefined && oldCourseMap[value.id].status == 1)
+                return;
+            var text = $(value).val();
+            var course = {};
+            if (text !== '') {
+                var teacherId = teacherMap[text].id;
+                if (oldCourseMap[value.id] !== undefined && text !== oldCourseMap[value.id].teacherName) {
+                    course.courseId = oldCourseMap[value.id].id;
+                    course.teacherId = teacherId;
+                    updatedCourseList.push(course)
+                } else if (oldCourseMap[value.id] !== undefined && text === oldCourseMap[value.id].teacherName) {
+                    return;
+                } else {
+                    course.teacherId = teacherId;
+                    var row = value.id.split("_")[0].substring(7);
+                    var col = value.id.split("_")[1];
+                    course.time = dayHeadList[col] + " " + timeList[row] + ":00";
+                    newCourseList.push(course);
+                }
+            } else {
+                if (oldCourseMap[value.id] !== undefined) {
+                    course.courseId = oldCourseMap[value.id].id;
+                    deletedCourseList.push(course);
+                }
+            }
+        });
+
+        if (newCourseList.length == 0 && deletedCourseList.length == 0 && updatedCourseList.length == 0) {
+            alert('没有进行任何排课');
+            return;
+        }
+
+        var param = {
+            studentId: studentId,
+            newCourseList: newCourseList,
+            deletedCourseList: deletedCourseList,
+            updatedCourseList: updatedCourseList
+        };
+
+        comJs.post('/course/saveBatchCourse?courseInfo=' + JSON.stringify(param), null, "保存成功", false);
+        batchManager.initBatchCourse();
+        return;
     },
 
     // 获取数据所在的行

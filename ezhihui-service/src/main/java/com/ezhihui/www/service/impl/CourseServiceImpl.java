@@ -96,12 +96,12 @@ public class CourseServiceImpl implements ICourseService {
     @Transactional
     public BaseResponse<Boolean> saveBatchCourse(BatchStudent batchStudent) {
         List<BatchStudent.BatchCourse> list = batchStudent.getNewCourseList();
-        Integer studentId = Integer.valueOf(batchStudent.getStudentId().substring(7));
+        Integer studentId = Integer.valueOf(batchStudent.getStudentId());
         for (BatchStudent.BatchCourse batchCourse : list) {
             Course course = new Course();
             course.setStudentId(studentId);
 
-            Integer teacherId = Integer.valueOf(batchCourse.getTeacherId().substring(7));
+            Integer teacherId = Integer.valueOf(batchCourse.getTeacherId());
             course.setTeacherId(teacherId);
             course.setTime(com.ezhihui.www.utils.DateUtils.StringToDate(batchCourse.getTime(), "yyyy-MM-dd HH:mm:ss"));
             course.setCourseTime(2.0);
@@ -118,7 +118,7 @@ public class CourseServiceImpl implements ICourseService {
         for (BatchStudent.BatchCourse batchCourse : batchStudent.getUpdatedCourseList()) {
             Course course = new Course();
             course.setId(batchCourse.getCourseId());
-            course.setTeacherId(Integer.valueOf(batchCourse.getTeacherId().substring(7)));
+            course.setTeacherId(Integer.valueOf(batchCourse.getTeacherId()));
             this.update(course);
         }
 
