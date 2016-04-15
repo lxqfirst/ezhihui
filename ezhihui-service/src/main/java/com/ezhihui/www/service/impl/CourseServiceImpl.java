@@ -8,11 +8,14 @@ import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.response.PageList;
 import com.ezhihui.www.response.PageListResponse;
 import com.ezhihui.www.service.ICourseService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +24,7 @@ import java.util.Map;
 /**
  * Created by lxq on 16/4/11.
  */
+@Slf4j
 @Service("courseService")
 public class CourseServiceImpl implements ICourseService {
     @Autowired
@@ -35,8 +39,15 @@ public class CourseServiceImpl implements ICourseService {
 
     @Override
     public BaseResponse<Integer> update(Course course) {
-        if (course.getTime() != null && course.getCourseTime() != null)
+        if (course.getTimeStr() != null && course.getCourseTime() != null) {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            try {
+                course.setTime(sf.parse(course.getTimeStr()));
+            } catch (ParseException e) {
+                log.info("param error ," + course.getTimeStr());
+            }
             course.setEndTime(DateUtils.addMinutes(course.getTime(), (int) (course.getCourseTime() * 60)));
+        }
         int rows = this.courseDAO.updateByPrimaryKeySelective(course);
         return new BaseResponse<>(rows);
     }
