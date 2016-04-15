@@ -52,7 +52,7 @@
 
     <!-- welcome-file-list -->
     <welcome-file-list>
-        <welcome-file>/views/template/index.jsp</welcome-file>
+        <welcome-file>/views/template/course/course_query.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>
