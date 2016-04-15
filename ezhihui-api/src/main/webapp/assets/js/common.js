@@ -494,6 +494,29 @@ var comJs = {
             }
         });
     },
+    getSync: function (url) {
+        var returnValue = "";
+        $.ajax({
+            url: url,
+            type: 'get',
+            contentType: "application/json",
+            cache: false,
+            async: false,
+            success: function (data) {
+                if (data.code == 0) {
+                    returnValue = data.data;
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+
+        return returnValue;
+    },
+
     autoComplete: function (inputButtonId, array) {
         $("#" + inputButtonId).typeahead({
             source: array,

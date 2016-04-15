@@ -81,7 +81,7 @@
                         <div>
                             <button type="button" class="btn btn-info"
                                     aria-label="Left Align"
-                                    onclick="course.createList()">
+                                    onclick="batchManager.initBatchCourse()">
 									<span class="glyphicon glyphicon-search" aria-hidden="true">
 									</span> 确定
                             </button>
@@ -128,7 +128,9 @@
             </div>
         </div>
         <!--table面板结束-->
+        <div id="comment">
 
+        </div>
 
     </div>
 </body>
