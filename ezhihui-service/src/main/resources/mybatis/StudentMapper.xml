@@ -131,6 +131,9 @@
         SELECT
         tb_student.* , tb_grade.grade_name
         FROM tb_student,tb_grade
-        WHERE tb_grade.id = tb_student.grade and name like CONCAT('%','${name}','%' )
+        WHERE tb_grade.id = tb_student.grade
+        <if test="id != null">
+            and tb_student.id=#{id,jdbcType=INTEGER}
+        </if>
     </select>
 </mapper>

@@ -107,12 +107,12 @@ public class CourseController extends BaseController {
     }
 
     /**
-     * 批量添加课程View
+     * view
      *
      * @return
      */
     @RequestMapping(value = "/courseView", method = RequestMethod.GET)
-    public String courseiew() {
+    public String courseView() {
         return "/template/course/course_query";
     }
 }

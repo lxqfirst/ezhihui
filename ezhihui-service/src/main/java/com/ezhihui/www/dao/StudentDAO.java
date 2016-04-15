@@ -1,9 +1,11 @@
 package com.ezhihui.www.dao;
 
 import com.ezhihui.www.domain.Student;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface StudentDAO {
     int deleteByPrimaryKey(Integer id);
 

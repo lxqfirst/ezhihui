@@ -2,10 +2,13 @@ package com.ezhihui.www.service.impl;
 
 import com.ezhihui.www.dao.StudentDAO;
 import com.ezhihui.www.domain.Student;
+import com.ezhihui.www.request.StudentPageRequest;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.response.PageList;
 import com.ezhihui.www.response.PageListResponse;
 import com.ezhihui.www.service.IStudentService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,19 +57,23 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public PageListResponse<Student> getPageList(Student student) {
+    public PageListResponse<Student> getPageList(StudentPageRequest request) {
+        PageHelper.startPage(request.getPageIndex(), request.getPageSize());
+
         PageListResponse<Student> result = new PageListResponse<>();
         PageList<Student> pageList = new PageList<>();
+        Student student = new Student();
+        student.setId(request.getId());
+        Page<Student> list = (Page<Student>) this.studentDAO.getByCondi(student);
 
-        List<Student> list = this.studentDAO.getByCondi(student);
         if (list == null || list.size() == 0) {
             result.setData(null);
             return result;
         }
         pageList.setList(list);
-        pageList.setPageIndex(1);
-        pageList.setPageSize(list.size());
-        pageList.setTotal(list.size());
+        pageList.setPageIndex(request.getPageIndex());
+        pageList.setPageSize(request.getPageSize());
+        pageList.setTotal(list.getTotal());
 
         result.setData(pageList);
         return result;

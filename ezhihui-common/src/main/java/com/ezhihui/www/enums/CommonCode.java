@@ -7,7 +7,8 @@ import java.io.Serializable;
  */
 public enum CommonCode implements Serializable {
 
-    SUCCESS(0, "成功");
+    SUCCESS(0, "成功"),
+    PARAM_ERROR(1, "参数错误");
 
     public final int code;
     public final String message;

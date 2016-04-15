@@ -2,6 +2,7 @@ package com.ezhihui.www.api.controller;
 
 import com.ezhihui.www.domain.Student;
 import com.ezhihui.www.domain.Teacher;
+import com.ezhihui.www.request.StudentPageRequest;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.response.PageListResponse;
 import com.ezhihui.www.service.IStudentService;
@@ -56,7 +57,17 @@ public class StudentController extends BaseController {
 
     @RequestMapping(value = "/getPageList", method = RequestMethod.GET)
     @ResponseBody
-    public PageListResponse<Student> getPageList(@ModelAttribute Student student) {
-        return this.studentService.getPageList(student);
+    public PageListResponse<Student> getPageList(@ModelAttribute StudentPageRequest request) {
+        return this.studentService.getPageList(request);
+    }
+
+    /**
+     * view
+     *
+     * @return
+     */
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String view() {
+        return "/template/student/student_query";
     }
 }

@@ -1,6 +1,7 @@
 package com.ezhihui.www.service;
 
 import com.ezhihui.www.domain.Student;
+import com.ezhihui.www.request.StudentPageRequest;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.response.PageListResponse;
 
@@ -20,5 +21,5 @@ public interface IStudentService {
 
     BaseResponse<List<Student>> getList(Student student);
 
-    PageListResponse<Student> getPageList(Student student);
+    PageListResponse<Student> getPageList(StudentPageRequest request);
 }

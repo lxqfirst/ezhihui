@@ -21,4 +21,6 @@ public class Student {
     private String telephoneParent;
 
     private String desc;
+
+    private String gradeName;
 }
