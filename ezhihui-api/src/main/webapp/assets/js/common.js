@@ -494,6 +494,29 @@ var comJs = {
             }
         });
     },
+    autoComplete: function (inputButtonId, array) {
+        $("#" + inputButtonId).typeahead({
+            source: array,
+            items: 15,//最多显示个数
+            updater: function (item) {
+                return item;//这里一定要return，否则选中不显示，外加调用display的时候null reference错误。
+            },
+            displayText: function (item) {
+                return item;//返回字符串
+            },
+            afterSelect: function (item) {
+                //选择项之后的事件 ，item是当前选中的。
+            },
+            delay: 100//延迟时间
+        });
+        //$("#look_up_array").click(function () {
+        //    $("#local_data").typeahead("lookup", '');
+        //});
+        //$("#get_value_array").click(function () {
+        //    var val = $("#local_data").typeahead("getActive");
+        //    console.log(val);
+        //});
+    },
 }
 
 Date.prototype.Format = function (fmt) {
