@@ -95,4 +95,14 @@ public class CourseController extends BaseController {
         CourseView view = new CourseView();
         return new ModelAndView(view, "courseList", courseList);
     }
+
+    /**
+     * 批量添加课程View
+     *
+     * @return
+     */
+    @RequestMapping(value = "/batchView", method = RequestMethod.GET)
+    public String batchView() {
+        return "/template/course/batch_course";
+    }
 }
