@@ -73,7 +73,7 @@ var teacherManager = {
         var result = comJs.getSync("/subject/getList");
         var option = "";
         $.each(result, function (n, value) {
-            gradeMap[value.gradeName] = value.id;
+            subjectMap[value.subjectName] = value.id;
             option += '<option value="' + value.id + '">' + value.subjectName + '</optionvalue>'
         });
 
