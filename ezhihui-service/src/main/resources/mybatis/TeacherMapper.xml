@@ -99,8 +99,10 @@
         tb_subject
         WHERE
         tb_teacher.subject_id = tb_subject.id
-        <if test="name != null">
-            AND NAME LIKE CONCAT('%', '${name}', '%')
+        <if test="id != null">
+            AND tb_teacher.id = #{id,jdbcType=INTEGER}
         </if>
+
+        order BY id DESC
     </select>
 </mapper>

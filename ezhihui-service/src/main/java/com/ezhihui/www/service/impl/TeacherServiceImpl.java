@@ -2,10 +2,13 @@ package com.ezhihui.www.service.impl;
 
 import com.ezhihui.www.dao.TeacherDAO;
 import com.ezhihui.www.domain.Teacher;
+import com.ezhihui.www.request.TeacherPageRequest;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.response.PageList;
 import com.ezhihui.www.response.PageListResponse;
 import com.ezhihui.www.service.ITeacherService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,19 +54,23 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public PageListResponse<Teacher> getPageList(Teacher teacher) {
+    public PageListResponse<Teacher> getPageList(TeacherPageRequest request) {
+        PageHelper.startPage(request.getPageIndex(), request.getPageSize());
+
         PageListResponse<Teacher> result = new PageListResponse<>();
         PageList<Teacher> pageList = new PageList<>();
+        Teacher teacher = new Teacher();
+        teacher.setId(request.getId());
+        Page<Teacher> list = (Page<Teacher>) this.teacherDAO.getByCondi(teacher);
 
-        List<Teacher> list = this.teacherDAO.getByCondi(teacher);
         if (list == null || list.size() == 0) {
             result.setData(null);
             return result;
         }
         pageList.setList(list);
-        pageList.setPageIndex(1);
-        pageList.setPageSize(list.size());
-        pageList.setTotal(list.size());
+        pageList.setPageIndex(request.getPageIndex());
+        pageList.setPageSize(request.getPageSize());
+        pageList.setTotal(list.getTotal());
 
         result.setData(pageList);
         return result;

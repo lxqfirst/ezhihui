@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>学生管理</title>
+    <title>教师管理</title>
     <!-- Bootstrap -->
     <link href="${contextPath}/assets/css/bootstrap.min.css"
           rel="stylesheet">
@@ -38,15 +38,15 @@
     <script src="${contextPath}/assets/js/moment.js"></script>
     <script src="${contextPath}/assets/js/bootstrap-datetimepicker.js"></script>
     <script src="${contextPath}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script src="${contextPath}/assets/js/student/student.js"></script>
+    <script src="${contextPath}/assets/js/teacher/teacher.js"></script>
     <script src="${contextPath}/assets/js/valid/valid.js"></script>
     <!-- 当前页js -->
     <script>
         $(document).ready(function () {
-            studentManager.initStudent('student');
-            studentManager.createList();
-            studentManager.initGrade();
-            $("#studentManager").addClass('active');
+            teacherManager.initTeacher('teacher')
+            teacherManager.createList();
+            teacherManager.initSubject();
+            $("#teacherManager").addClass('active');
         });
     </script>
 </head>
@@ -60,7 +60,7 @@
     <div class="col-md-10">
         <h3>
 				<span class="glyphicon glyphicon-align-left" aria-hidden="true">
-				</span> 学生管理
+				</span> 教师管理
         </h3>
         <!--检索面板-->
         <div class="panel panel-info">
@@ -70,8 +70,8 @@
                     <!-- /.col-lg-6 -->
                     <div class="col-lg-3">
                         <div class="input-group">
-                            <span class="input-group-addon"> 学生 </span>
-                            <input id="student" autocomplete="off" data-provide="typeahead" type="text"
+                            <span class="input-group-addon"> 教师 </span>
+                            <input id="teacher" autocomplete="off" data-provide="typeahead" type="text"
                                    class="form-control" placeholder=""/>
 
                         </div>
@@ -82,7 +82,7 @@
                         <div>
                             <button type="button" class="btn btn-info"
                                     aria-label="Left Align"
-                                    onclick="studentManager.createList()">
+                                    onclick="teacherManager.createList()">
 									<span class="glyphicon glyphicon-search" aria-hidden="true">
 									</span> 检索
                             </button>
@@ -108,19 +108,14 @@
             <div class="bootstrap-admin-panel-content">
 
                 <table class="table table-bordered" id="page_table"
-                       table_url="${contextPath}/student/getPageList">
+                       table_url="${contextPath}/teacher/getPageList">
                     <thead>
                     <tr>
                         <th id='order' style="text-align:center;">序号</th>
-                        <th id='name' style="text-align:center;">学生</th>
-                        <th id='gradeName' style="text-align:center;">年级</th>
-                        <th id='className' style="text-align:center;" data-options="studentManager.transNull">班级</th>
-                        <th id='school' style="text-align:center;" data-options="studentManager.transNull">学校</th>
-                        <th id='telephone' style="text-align:center;" data-options="studentManager.transNull">联系方式</th>
-                        <th id='telephoneParent' style="text-align:center;" data-options="studentManager.transNull">
-                            父母联系方式
-                        </th>
-                        <th id="student-operation" style="text-align:center;">操作</th>
+                        <th id='name' style="text-align:center;">教师</th>
+                        <th id='subjectName' style="text-align:center;">学科</th>
+                        <th id='telephone' style="text-align:center;" data-options="teacherManager.transNull">联系方式</th>
+                        <th id="teacher-operation" style="text-align:center;">操作</th>
                     </tr>
                     </thead>
                     <tbody id='com_tbody'>
@@ -144,7 +139,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"
                             aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">学生设置</h4>
+                    <h4 class="modal-title" id="myModalLabel">教师设置</h4>
                 </div>
 
                 <div class="panel-info">
@@ -161,36 +156,16 @@
                             </div>
                             <div class="col-lg-5">
                                 <div class="input-group">
-                                    <span class="input-group-addon"> 学校 </span>
-                                    <input type="text" class="form-control" id="schoolNew"
-                                           aria-label="...">
+                                    <span class="input-group-addon"> 学科 </span>
+                                    <select class="form-control" id="subject">
+
+                                    </select>
                                 </div>
                                 <!-- /input-group -->
                             </div>
                         </div>
 
                         <div class="clearfix" style="margin-bottom: 10px;"></div>
-
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="input-group">
-                                    <span class="input-group-addon"> 年级 </span>
-                                    <select class="form-control" id="grade">
-
-                                    </select>
-                                </div>
-                                <!-- /input-group -->
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="input-group">
-                                    <span class="input-group-addon"> 班级 </span>
-                                    <input type="text" class="form-control" id="classNameNew"
-                                           aria-label="...">
-                                </div>
-                                <!-- /input-group -->
-                            </div>
-
-                        </div>
 
                         <div class="clearfix" style="margin-bottom: 10px;"></div>
 
@@ -201,15 +176,6 @@
                                     <input type="text"
                                            class="form-control"
                                            id="phoneNew"
-                                           aria-label="...">
-                                </div>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="input-group">
-                                    <span class="input-group-addon"> 父母联系方式 </span>
-                                    <input type="text"
-                                           class="form-control"
-                                           id="parentPhoneNew"
                                            aria-label="...">
                                 </div>
                             </div>

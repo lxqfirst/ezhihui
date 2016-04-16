@@ -55,4 +55,10 @@
     set subject_name = #{subjectName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_subject
+    </select>
 </mapper>

@@ -15,4 +15,10 @@ public class Teacher {
     private String desc;
 
     private Integer subjectId;
+
+    private String subjectName;
+
+    private Double salary;
+
+    private Long comment = 0L;
 }

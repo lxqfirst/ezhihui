@@ -1,15 +1,13 @@
 package com.ezhihui.www.api.controller;
 
 import com.ezhihui.www.domain.Teacher;
+import com.ezhihui.www.request.TeacherPageRequest;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.response.PageListResponse;
 import com.ezhihui.www.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,13 +22,13 @@ public class TeacherController extends BaseController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse<Integer> create(Teacher teacher) {
+    public BaseResponse<Integer> create(@ModelAttribute Teacher teacher) {
         return this.teacherService.create(teacher);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse<Integer> update(Teacher teacher) {
+    public BaseResponse<Integer> update(@ModelAttribute Teacher teacher) {
         return this.teacherService.update(teacher);
     }
 
@@ -42,7 +40,7 @@ public class TeacherController extends BaseController {
 
     @RequestMapping(value = "/deleteById", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse<Integer> deleteById(Integer id) {
+    public BaseResponse<Integer> deleteById(@RequestParam("id") Integer id) {
         return this.teacherService.deleteById(id);
     }
 
@@ -54,7 +52,18 @@ public class TeacherController extends BaseController {
 
     @RequestMapping(value = "/getPageList", method = RequestMethod.GET)
     @ResponseBody
-    public PageListResponse<Teacher> getPageList(@ModelAttribute Teacher teacher) {
-        return this.teacherService.getPageList(teacher);
+    public PageListResponse<Teacher> getPageList(@ModelAttribute TeacherPageRequest request) {
+        return this.teacherService.getPageList(request);
+    }
+
+
+    /**
+     * view
+     *
+     * @return
+     */
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String view() {
+        return "/template/teacher/teacher_query";
     }
 }

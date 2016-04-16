@@ -68,6 +68,14 @@ var comJs = {
         opTd += '</td>';
         return opTd;
     },
+
+    appendOpForTeacher: function () {
+        var opTd = '<td style="text-align:center;">';
+        opTd += '<a onclick = teacherManager.showEditView($(this)) title="编辑">编辑</a>&nbsp;&nbsp;&nbsp' +
+            '<a onclick = teacherManager.deleteStudent($(this)) title="删除">删除</a>';
+        opTd += '</td>';
+        return opTd;
+    },
     /*
      * 格式化时间
      */
@@ -333,6 +341,8 @@ var comJs = {
                                 tr += "<td style='text-align:center;'>" + '<input type="checkbox" id = check' + value.id + ' class="check"/>' + "</td>";
                             } else if (fieldName == 'student-operation') {
                                 tr += comJs.appendOpForStudent();
+                            } else if (fieldName == 'teacher-operation') {
+                                tr += comJs.appendOpForTeacher();
                             } else {
                                 tr += "<td style='text-align:center;'>" + fieldVal + "</td>";
                             }
