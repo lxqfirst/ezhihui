@@ -9,10 +9,7 @@ import com.ezhihui.www.service.IStudentService;
 import com.ezhihui.www.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,25 +24,25 @@ public class StudentController extends BaseController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse<Integer> create(Student student) {
+    public BaseResponse<Integer> create(@RequestBody Student student) {
         return this.studentService.create(student);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse<Integer> update(Student student) {
+    public BaseResponse<Integer> update(@RequestBody Student student) {
         return this.studentService.update(student);
     }
 
     @RequestMapping(value = "/getById", method = RequestMethod.GET)
     @ResponseBody
-    public BaseResponse<Student> getById(Integer id) {
+    public BaseResponse<Student> getById(@RequestParam("id") Integer id) {
         return this.studentService.getById(id);
     }
 
     @RequestMapping(value = "/deleteById", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse<Integer> deleteById(Integer id) {
+    public BaseResponse<Integer> deleteById(@RequestParam("id") Integer id) {
         return this.studentService.deleteById(id);
     }
 

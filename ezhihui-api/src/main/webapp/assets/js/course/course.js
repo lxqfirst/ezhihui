@@ -108,6 +108,7 @@ var course = {
     },
 
     showCreateCourseView: function () {
+        course.clearModel();
         $('#updateButton').hide();
         $('#createButton').show();
         $('#continueButton').show();

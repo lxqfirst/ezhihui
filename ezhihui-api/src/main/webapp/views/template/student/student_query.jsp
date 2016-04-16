@@ -45,6 +45,7 @@
         $(document).ready(function () {
             studentManager.initStudent('student');
             studentManager.createList();
+            studentManager.initGrade();
             $("#studentManager").addClass('active');
         });
     </script>
@@ -91,7 +92,7 @@
                         <div>
                             <button type="button" class="btn btn-info"
                                     aria-label="Right Align"
-                                    onclick="course.showCreateCourseView()">
+                                    onclick="studentManager.showCreateView()">
 									<span class="glyphicon glyphicon-plus" aria-hidden="true">
 									</span> 新建
                             </button>
@@ -113,7 +114,7 @@
                         <th id='order' style="text-align:center;">序号</th>
                         <th id='name' style="text-align:center;">学生</th>
                         <th id='gradeName' style="text-align:center;">年级</th>
-                        <th id='subjectName' style="text-align:center;" data-options="studentManager.transNull">班级</th>
+                        <th id='className' style="text-align:center;" data-options="studentManager.transNull">班级</th>
                         <th id='school' style="text-align:center;" data-options="studentManager.transNull">学校</th>
                         <th id='telephone' style="text-align:center;" data-options="studentManager.transNull">联系方式</th>
                         <th id='telephoneParent' style="text-align:center;" data-options="studentManager.transNull">
@@ -149,39 +150,20 @@
                 <div class="panel-info">
                     <div class="bootstrap-admin-panel-content">
                         <div class="row">
-                            <!-- /.col-lg-4 -->
-                            <div class="col-lg-8">
-                                <div class="input-group">
-                                    <span class="input-group-addon">上课时间</span>
-                                    <div id="" class="input-group date" data-date-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" type="text" value="" id="timeNew" required
-                                               message="上课时间">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                        <span class="input-group-addon"><span
-                                                class="glyphicon glyphicon-th"></span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="clearfix" style="margin-bottom: 10px;"></div>
-
-                        <div class="row">
                             <!-- /.col-lg-6 -->
-                            <div class="col-lg-4">
+                            <div class="col-lg-5">
                                 <div class="input-group">
-                                    <span class="input-group-addon"> 学生 </span>
-                                    <input id="studentNew" autocomplete="off" data-provide="typeahead" type="text"
-                                           class="form-control" placeholder="" required message="学生"/>
+                                    <span class="input-group-addon"> 姓名 </span>
+                                    <input type="text" class="form-control" id="nameNew"
+                                           aria-label="..." required message="学生姓名">
                                 </div>
                                 <!-- /input-group -->
                             </div>
-                            <!-- /.col-lg-6 -->
-                            <div class="col-lg-4">
+                            <div class="col-lg-5">
                                 <div class="input-group">
-                                    <span class="input-group-addon"> 教师 </span>
-                                    <input id="teacherNew" autocomplete="off" data-provide="typeahead" type="text"
-                                           class="form-control" placeholder="" required message="教师"/>
+                                    <span class="input-group-addon"> 学校 </span>
+                                    <input type="text" class="form-control" id="schoolNew"
+                                           aria-label="...">
                                 </div>
                                 <!-- /input-group -->
                             </div>
@@ -190,21 +172,44 @@
                         <div class="clearfix" style="margin-bottom: 10px;"></div>
 
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-5">
                                 <div class="input-group">
-                                    <span class="input-group-addon"> 时长 </span>
+                                    <span class="input-group-addon"> 年级 </span>
+                                    <select class="form-control" id="grade">
+
+                                    </select>
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 班级 </span>
+                                    <input type="text" class="form-control" id="classNameNew"
+                                           aria-label="...">
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix" style="margin-bottom: 10px;"></div>
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 联系方式 </span>
                                     <input type="text"
                                            class="form-control"
-                                           id="courseTimeNew"
-                                           aria-label="..." required message="时长" value="2">
+                                           id="phoneNew"
+                                           aria-label="...">
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-5">
                                 <div class="input-group">
-                                    <span class="input-group-addon"> 教室 </span>
+                                    <span class="input-group-addon"> 父母联系方式 </span>
                                     <input type="text"
                                            class="form-control"
-                                           id="classroomNew"
+                                           id="parentPhoneNew"
                                            aria-label="...">
                                 </div>
                             </div>
@@ -213,13 +218,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="course.createCourse(0)" id="createButton">
+                    <button type="button" class="btn btn-primary" onclick="studentManager.create(0)" id="createButton">
                         保存并关闭
                     </button>
-                    <button type="button" class="btn btn-info" onclick="course.createCourse(1)" id="continueButton">
+                    <button type="button" class="btn btn-info" onclick="studentManager.create(1)" id="continueButton">
                         保存并继续
                     </button>
-                    <button type="button" class="btn btn-primary" onclick="course.updateCourse()" id="updateButton">
+                    <button type="button" class="btn btn-primary" onclick="studentManager.update()"
+                            id="updateButton">
                         保存并关闭
                     </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消

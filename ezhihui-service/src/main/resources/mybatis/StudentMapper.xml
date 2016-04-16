@@ -135,5 +135,6 @@
         <if test="id != null">
             and tb_student.id=#{id,jdbcType=INTEGER}
         </if>
+        order BY id DESC
     </select>
 </mapper>
