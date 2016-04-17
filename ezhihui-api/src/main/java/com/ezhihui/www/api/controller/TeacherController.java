@@ -22,13 +22,13 @@ public class TeacherController extends BaseController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse<Integer> create(@ModelAttribute Teacher teacher) {
+    public BaseResponse<Integer> create(@RequestBody Teacher teacher) {
         return this.teacherService.create(teacher);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse<Integer> update(@ModelAttribute Teacher teacher) {
+    public BaseResponse<Integer> update(@RequestBody Teacher teacher) {
         return this.teacherService.update(teacher);
     }
 

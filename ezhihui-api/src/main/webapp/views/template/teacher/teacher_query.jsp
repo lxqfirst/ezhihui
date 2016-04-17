@@ -92,7 +92,7 @@
                         <div>
                             <button type="button" class="btn btn-info"
                                     aria-label="Right Align"
-                                    onclick="studentManager.showCreateView()">
+                                    onclick="teacherManager.showCreateView()">
 									<span class="glyphicon glyphicon-plus" aria-hidden="true">
 									</span> 新建
                             </button>
@@ -150,7 +150,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"> 姓名 </span>
                                     <input type="text" class="form-control" id="nameNew"
-                                           aria-label="..." required message="学生姓名">
+                                           aria-label="..." required message="教师姓名">
                                 </div>
                                 <!-- /input-group -->
                             </div>
@@ -184,13 +184,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="studentManager.create(0)" id="createButton">
+                    <button type="button" class="btn btn-primary" onclick="teacherManager.create(0)" id="createButton">
                         保存并关闭
                     </button>
-                    <button type="button" class="btn btn-info" onclick="studentManager.create(1)" id="continueButton">
+                    <button type="button" class="btn btn-info" onclick="teacherManager.create(1)" id="continueButton">
                         保存并继续
                     </button>
-                    <button type="button" class="btn btn-primary" onclick="studentManager.update()"
+                    <button type="button" class="btn btn-primary" onclick="teacherManager.update()"
                             id="updateButton">
                         保存并关闭
                     </button>

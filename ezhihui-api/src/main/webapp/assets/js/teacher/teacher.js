@@ -10,7 +10,7 @@ var teacherMap = {};
 
 var subjectMap = {};
 
-var currentStudentId;
+var currentTeacherId;
 
 var teacherManager = {
     initTeacher: function (id) {
@@ -79,4 +79,74 @@ var teacherManager = {
 
         $('#subject').append(option);
     },
+
+    create: function (flag) {
+        if (!validJs.triggerValid()) {
+            return;
+        }
+
+        var param = {
+            "name": $('#nameNew').val(),
+            "telephone": $('#phoneNew').val(),
+            "subjectId": parseInt(document.getElementById('subject')[document.getElementById('subject').selectedIndex].value)
+        };
+
+        comJs.post("/teacher/create", param, "新加教师成功", false);
+        teacherManager.clearModel();
+        teacherManager.createList();
+        if (flag == 0) {
+            $('#myModal').modal('hide');
+        }
+    },
+
+
+    showCreateView: function ($a) {
+        teacherManager.clearModel();
+        $('#updateButton').hide();
+        $('#createButton').show();
+        $('#continueButton').show();
+        $('#myModal').modal('show');
+    },
+
+    clearModel: function () {
+        $('#nameNew').val('');
+        $('#phoneNew').val('');
+        $('option:first').prop('selected', 'selected');
+    },
+
+    showEditView: function ($param) {
+        teacherManager.clearModel();
+        currentTeacherId = $param.parent().parent()[0].id;
+
+        $('#nameNew').val($param.parent().parent().children()[1].innerHTML);
+        if ($param.parent().parent().children()[3].innerHTML != "&nbsp;")
+            $('#phoneNew').val($param.parent().parent().children()[3].innerHTML);
+
+        var subject = $param.parent().parent().children()[2].innerHTML;
+
+        $('option[value=' + subjectMap[subject] + ']').prop('selected', 'selected');
+
+        $('#updateButton').show();
+        $('#createButton').hide();
+        $('#continueButton').hide();
+        $('#myModal').modal('show');
+    },
+
+    update: function () {
+        if (!validJs.triggerValid()) {
+            return;
+        }
+
+        var param = {
+            "id": currentTeacherId,
+            "name": $('#nameNew').val(),
+            "telephone": $('#phoneNew').val(),
+            "subjectId": parseInt(document.getElementById('subject')[document.getElementById('subject').selectedIndex].value)
+        };
+
+        comJs.post("/teacher/update", param, "更新教师成功", false);
+        teacherManager.clearModel();
+        teacherManager.createList();
+        $('#myModal').modal('hide');
+    }
 }
