@@ -37,4 +37,17 @@
             </if>
         </trim>
     </insert>
+
+    <select id="getByCondi" resultMap="BaseResultMap"
+            parameterType="com.ezhihui.www.domain.TeacherGradeCost">
+        SELECT * from tb_teacher_grade_cost
+        <trim prefix="where" suffix="" prefixOverrides="and | or | AND | OR ">
+            <if test="teacherId != null">
+                and teacher_id = #{teacherId,jdbcType=INTEGER}
+            </if>
+            <if test="gradeId != null">
+                and grade_id = #{gradeId,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </select>
 </mapper>

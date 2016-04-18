@@ -20,5 +20,5 @@ public class Teacher {
 
     private Double salary;
 
-    private Long comment = 0L;
+    private Integer comment = 0;
 }
