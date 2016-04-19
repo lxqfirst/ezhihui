@@ -79,8 +79,14 @@ var costManager = {
         $.each(result, function (n, value) {
             costManager.modelAdd(value);
         });
+        var grades = comJs.getSync("/grade/getGradeNameByTeacherId?teacherId=" + currentTeacherId);
+        var gradeText = '';
+        $.each(grades, function (n, value) {
+            gradeText += "," + value;
+        });
+        $('#grades').html(gradeText.substring(1));
+        $('#myModalLabel').html('财务设置·' + $a.parent().parent().children()[1].innerHTML);
         $('#myModal').modal('show');
-
     },
 
     modelAdd: function (value) {

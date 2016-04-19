@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface IGradeService {
     BaseResponse<List<Grade>> getAll();
+
+    BaseResponse<List<String>> getGradeNameByTeacherId(Integer teacherId);
 }

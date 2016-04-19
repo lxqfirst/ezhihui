@@ -183,7 +183,15 @@
                             aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">财务设置</h4>
                 </div>
-
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="input-group">
+                            涉及年级:<label id="grades"> </label>
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+                </div>
+                <div class="clearfix modelClearFix" style="margin-bottom: 10px;"></div>
                 <div class="panel-info">
                     <div class="bootstrap-admin-panel-content" id="model_panel">
                     </div>

@@ -18,4 +18,6 @@ public interface GradeDAO {
     int updateByPrimaryKey(Grade record);
 
     List<Grade> getAll();
+
+    List<String> getGradeNameByTeacherId(Integer teacherId);
 }

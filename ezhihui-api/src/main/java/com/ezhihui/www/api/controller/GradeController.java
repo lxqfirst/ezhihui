@@ -28,4 +28,10 @@ public class GradeController extends BaseController {
     public BaseResponse<List<Grade>> getById() {
         return this.gradeService.getAll();
     }
+
+    @RequestMapping(value = "/getGradeNameByTeacherId", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse<List<String>> getGradeNameByTeacherId(@RequestParam("teacherId") Integer teacherId) {
+        return this.gradeService.getGradeNameByTeacherId(teacherId);
+    }
 }

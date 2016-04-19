@@ -22,4 +22,10 @@ public class GradeServiceImpl implements IGradeService {
         List<Grade> list = gradeDAO.getAll();
         return new BaseResponse<>(list);
     }
+
+    @Override
+    public BaseResponse<List<String>> getGradeNameByTeacherId(Integer teacherId) {
+        List<String> result = this.gradeDAO.getGradeNameByTeacherId(teacherId);
+        return new BaseResponse<>(result);
+    }
 }
