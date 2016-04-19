@@ -144,7 +144,7 @@
         <!--检索面板结束-->
         <!--table面板-->
         <div class="panel panel-info">
-            <div class="panel-heading">学生列表</div>
+            <div class="panel-heading">财务列表</div>
             <div class="bootstrap-admin-panel-content">
 
                 <table class="table table-bordered" id="page_table"
