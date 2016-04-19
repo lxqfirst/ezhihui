@@ -50,4 +50,9 @@
             </if>
         </trim>
     </select>
+
+    <delete id="deleteByTeacherId" parameterType="java.lang.Integer">
+        delete from tb_teacher_grade_cost
+        where teacher_id = #{teacherId,jdbcType=INTEGER}
+    </delete>
 </mapper>

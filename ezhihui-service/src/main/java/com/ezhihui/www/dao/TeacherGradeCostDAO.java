@@ -10,4 +10,6 @@ public interface TeacherGradeCostDAO {
     int insertSelective(TeacherGradeCost record);
 
     List<TeacherGradeCost> getByCondi(TeacherGradeCost teacherGradeCost);
+
+    int deleteByTeacherId(Integer teacherId);
 }

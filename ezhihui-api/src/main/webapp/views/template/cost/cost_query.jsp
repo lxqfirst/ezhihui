@@ -61,6 +61,7 @@
             $('#end_time_input').val(new Date().Format("yyyy-MM-dd") + " 23:00:00");
             costManager.initTeacher('teacher')
             costManager.createList();
+            costManager.initGrade();
             $("#costManager").addClass('active');
         });
     </script>
@@ -152,9 +153,11 @@
                     <tr>
                         <th id='order' style="text-align:center;">序号</th>
                         <th id='name' style="text-align:center;">教师</th>
-                        <th id='salary' style="text-align:center;">薪水</th>
-                        <th id='comment' style="text-align:center;">备注</th>
-                        <th id="teacher-operation" style="text-align:center;">操作</th>
+                        <th id='salary' style="text-align:center;" data-options="costManager.transNull">薪水</th>
+                        <th id='comment' style="text-align:center; width: 150px" data-options="costManager.transNull">
+                            备注
+                        </th>
+                        <th id="cost-operation" style="text-align:center;">操作</th>
                     </tr>
                     </thead>
                     <tbody id='com_tbody'>
@@ -178,62 +181,21 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"
                             aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">教师设置</h4>
+                    <h4 class="modal-title" id="myModalLabel">财务设置</h4>
                 </div>
 
                 <div class="panel-info">
-                    <div class="bootstrap-admin-panel-content">
-                        <div class="row">
-                            <!-- /.col-lg-6 -->
-                            <div class="col-lg-5">
-                                <div class="input-group">
-                                    <span class="input-group-addon"> 姓名 </span>
-                                    <input type="text" class="form-control" id="nameNew"
-                                           aria-label="..." required message="教师姓名">
-                                </div>
-                                <!-- /input-group -->
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="input-group">
-                                    <span class="input-group-addon"> 学科 </span>
-                                    <select class="form-control" id="subject">
-
-                                    </select>
-                                </div>
-                                <!-- /input-group -->
-                            </div>
-                        </div>
-
-                        <div class="clearfix" style="margin-bottom: 10px;"></div>
-
-                        <div class="clearfix" style="margin-bottom: 10px;"></div>
-
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="input-group">
-                                    <span class="input-group-addon"> 联系方式 </span>
-                                    <input type="text"
-                                           class="form-control"
-                                           id="phoneNew"
-                                           aria-label="...">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix" style="margin-bottom: 10px;"></div>
+                    <div class="bootstrap-admin-panel-content" id="model_panel">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="teacherManager.create(0)" id="createButton">
-                        保存并关闭
+                    <button type="button" class="btn btn-primary" onclick="costManager.modelAdd(null)">
+                        新增
                     </button>
-                    <button type="button" class="btn btn-info" onclick="teacherManager.create(1)" id="continueButton">
-                        保存并继续
+                    <button type="button" class="btn btn-info" onclick="costManager.create()" id="continueButton">
+                        保存
                     </button>
-                    <button type="button" class="btn btn-primary" onclick="teacherManager.update()"
-                            id="updateButton">
-                        保存并关闭
-                    </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                    <button type="button" class="btn btn-default" onclick="costManager.hideModel()">取消
                     </button>
                 </div>
             </div>

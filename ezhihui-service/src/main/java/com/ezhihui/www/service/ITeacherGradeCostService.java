@@ -22,5 +22,9 @@ public interface ITeacherGradeCostService {
      */
     PageListResponse<Teacher> calcTeacherSalary(String startTimeStr, String endTimeStr, Integer teacherId);
 
-    BaseResponse<TeacherGradeCost> getByCondi(TeacherGradeCost teacherGradeCost);
+    BaseResponse<List<TeacherGradeCost>> getByCondi(TeacherGradeCost teacherGradeCost);
+
+    BaseResponse<Integer> create(TeacherGradeCost cost);
+
+    BaseResponse<Integer> deleteByTeacherId(Integer teacherId);
 }

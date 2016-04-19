@@ -91,8 +91,21 @@ public class TeacherGradeCostImpl implements ITeacherGradeCostService {
     }
 
     @Override
-    public BaseResponse<TeacherGradeCost> getByCondi(TeacherGradeCost teacherGradeCost) {
-        return null;
+    public BaseResponse<List<TeacherGradeCost>> getByCondi(TeacherGradeCost teacherGradeCost) {
+        List<TeacherGradeCost> teacherGradeCostList = teacherGradeCostDAO.getByCondi(teacherGradeCost);
+        return new BaseResponse<>(teacherGradeCostList);
+    }
+
+    @Override
+    public BaseResponse<Integer> create(TeacherGradeCost cost) {
+        int rows = this.teacherGradeCostDAO.insertSelective(cost);
+        return new BaseResponse<>(rows);
+    }
+
+    @Override
+    public BaseResponse<Integer> deleteByTeacherId(Integer teacherId) {
+        int rows = this.teacherGradeCostDAO.deleteByTeacherId(teacherId);
+        return new BaseResponse<>(rows);
     }
 
     private Map<String, Double> getCostMapByTeacherId(Integer teacherId) {

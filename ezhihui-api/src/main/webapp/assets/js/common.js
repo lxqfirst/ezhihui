@@ -76,6 +76,14 @@ var comJs = {
         opTd += '</td>';
         return opTd;
     },
+
+    appendOpForCost: function () {
+        var opTd = '<td style="text-align:center;">';
+        opTd += '<a onclick = costManager.showEditView($(this)) title="设置">设置</a>';
+        opTd += '</td>';
+        return opTd;
+    },
+
     /*
      * 格式化时间
      */
@@ -343,6 +351,8 @@ var comJs = {
                                 tr += comJs.appendOpForStudent();
                             } else if (fieldName == 'teacher-operation') {
                                 tr += comJs.appendOpForTeacher();
+                            } else if (fieldName == 'cost-operation') {
+                                tr += comJs.appendOpForCost();
                             } else {
                                 tr += "<td style='text-align:center;'>" + fieldVal + "</td>";
                             }
