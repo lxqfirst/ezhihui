@@ -79,7 +79,8 @@ var comJs = {
 
     appendOpForCost: function () {
         var opTd = '<td style="text-align:center;">';
-        opTd += '<a onclick = costManager.showEditView($(this)) title="设置">设置</a>';
+        opTd += '<a onclick = costManager.showEditView($(this)) title="设置">设置</a>&nbsp;&nbsp;&nbsp';
+        opTd += '<a onclick = costManager.courseDetail($(this)) title="课程详情">课程详情</a>';
         opTd += '</td>';
         return opTd;
     },

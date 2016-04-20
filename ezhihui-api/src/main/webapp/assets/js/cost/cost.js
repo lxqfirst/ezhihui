@@ -192,5 +192,26 @@ var costManager = {
 
         window.location.href = "/cost/exportCost?startTimeStr=" + ss.startTimeStr
             + "&endTimeStr=" + ss.endTimeStr + "&teacherId=" + ss.teacherId;
+    },
+
+    courseDetail: function ($a) {
+        if ($('#start_time_input').val() == '') {
+            alert('请输入开始时间');
+            return;
+        }
+
+        if ($('#end_time_input').val() == '') {
+            alert('请输入结束时间');
+            return;
+        }
+        var teacherId = $a.parent().parent()[0].id;
+        var ss = {
+            "teacherId": teacherId,
+            "startTimeStr": $('#start_time_input').val(),
+            "endTimeStr": $('#end_time_input').val(),
+        };
+
+        window.open("/cost/courseView?teacherId=" + ss.teacherId + "&startTimeStr="
+            + ss.startTimeStr + "&endTimeStr=" + ss.endTimeStr);
     }
 }

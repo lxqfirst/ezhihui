@@ -79,4 +79,15 @@ public class TeacherGradeCostController extends BaseController {
         CostView view = new CostView();
         return new ModelAndView(view, "teacherList", result.getData().getItems());
     }
+
+
+    @RequestMapping(value = "/courseView", method = RequestMethod.GET)
+    public ModelAndView courseView(@RequestParam("startTimeStr") String startTimeStr, @RequestParam("endTimeStr") String endTimeStr, @RequestParam(value = "teacherId") Integer teacherId) {
+        ModelAndView modelAndView = new ModelAndView("/template/cost/cost_course_query");
+        modelAndView.addObject("startTimeStr", startTimeStr);
+        modelAndView.addObject("endTimeStr", endTimeStr);
+        modelAndView.addObject("teacherId", teacherId);
+
+        return modelAndView;
+    }
 }
