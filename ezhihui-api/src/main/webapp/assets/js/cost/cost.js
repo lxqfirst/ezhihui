@@ -169,5 +169,28 @@ var costManager = {
     deleteModelCost: function ($a) {
         $a.parent().parent().parent().next().remove();
         $a.parent().parent().parent().remove();
+    },
+
+    download: function () {
+        if ($('#start_time_input').val() == '') {
+            alert('请输入开始时间');
+            return;
+        }
+
+        if ($('#end_time_input').val() == '') {
+            alert('请输入结束时间');
+            return;
+        }
+
+        var ss = {
+            "pageSize": 20,
+            "teacherId": costManager.getTeacherId('teacher'),
+            "startTimeStr": $('#start_time_input').val(),
+            "endTimeStr": $('#end_time_input').val(),
+        };
+
+
+        window.location.href = "/cost/exportCost?startTimeStr=" + ss.startTimeStr
+            + "&endTimeStr=" + ss.endTimeStr + "&teacherId=" + ss.teacherId;
     }
 }

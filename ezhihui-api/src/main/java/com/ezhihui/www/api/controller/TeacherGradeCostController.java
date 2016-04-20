@@ -1,6 +1,9 @@
 package com.ezhihui.www.api.controller;
 
+import com.ezhihui.www.api.view.CostView;
+import com.ezhihui.www.api.view.CourseView;
 import com.ezhihui.www.domain.App;
+import com.ezhihui.www.domain.Course;
 import com.ezhihui.www.domain.Teacher;
 import com.ezhihui.www.domain.TeacherGradeCost;
 import com.ezhihui.www.response.BaseResponse;
@@ -9,10 +12,8 @@ import com.ezhihui.www.service.ITeacherGradeCostService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -70,5 +71,12 @@ public class TeacherGradeCostController extends BaseController {
             this.teacherGradeCostService.create(tmp);
         }
         return new BaseResponse<>(Boolean.TRUE);
+    }
+
+    @RequestMapping(value = "/exportCost", method = RequestMethod.GET)
+    public ModelAndView exportDrivers(@RequestParam("startTimeStr") String startTimeStr, @RequestParam("endTimeStr") String endTimeStr, @RequestParam(value = "teacherId", required = false) Integer teacherId) {
+        PageListResponse<Teacher> result = this.teacherGradeCostService.calcTeacherSalary(startTimeStr, endTimeStr, teacherId);
+        CostView view = new CostView();
+        return new ModelAndView(view, "teacherList", result.getData().getItems());
     }
 }

@@ -132,7 +132,7 @@
                         <div>
                             <button type="button" class="btn btn-info"
                                     aria-label="Right Align"
-                                    onclick="teacherManager.showCreateView()">
+                                    onclick="costManager.download()">
 									<span class="glyphicon glyphicon-download" aria-hidden="true">
 									</span> 下载
                             </button>
