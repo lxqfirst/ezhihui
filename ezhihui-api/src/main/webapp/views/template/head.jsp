@@ -24,7 +24,7 @@
                                         aria-expanded="false"> 设置 <span class="caret"> </span>
                 </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/logout"> 注销 </a></li>
+                        <li><a onclick="userManager.logout()"> 注销 </a></li>
                     </ul>
                 </li>
             </ul>
@@ -35,25 +35,26 @@
 </nav>
 </body>
 <script type="text/javascript">
-    //$(document).ready(function() {
-    //
-    //	$.ajax({
-    //		url : "/user/getName",
-    //		type : "GET",
-    //		dataType : "json",
-    //		async : false,
-    //		contentType : "application/json",
-    //		success : function(data) {
-    //			if (data.code == 0) {
-    //				$("#username").html(data.data);
-    //			} else {
-    //				alert(data.message);
-    //			}
-    //		},
-    //		error : function() {
-    //			alert("异常！");
-    //		}
-    //	});
-    //});
+    var userManager = {
+        logout: function () {
+            $.ajax({
+                url: "/logout",
+                type: "GET",
+                dataType: "json",
+                async: false,
+                contentType: "application/json",
+                success: function (data) {
+                    if (data.code == 0) {
+                        window.location.href = '../../login.jsp';
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function () {
+                    alert("异常！");
+                }
+            });
+        }
+    }
 </script>
 </html>

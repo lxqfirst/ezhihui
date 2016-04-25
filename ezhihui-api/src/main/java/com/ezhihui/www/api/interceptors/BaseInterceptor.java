@@ -63,17 +63,18 @@ public abstract class BaseInterceptor extends HandlerInterceptorAdapter {
      * @return
      */
     private boolean isNeedLogin(Annotation annotations[]) {
-        if (annotations == null || annotations.length == 0) {
-            return false;
-        }
-
-        for (Annotation annotation : annotations) {
-            if (annotation.annotationType().equals(Login.class)) {
-                return true;
-            }
-        }
-
-        return false;
+//        if (annotations == null || annotations.length == 0) {
+//            return false;
+//        }
+//
+//        for (Annotation annotation : annotations) {
+//            if (annotation.annotationType().equals(Login.class)) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+        return true;
     }
 
     private void updateSession(String token, HttpServletRequest request,

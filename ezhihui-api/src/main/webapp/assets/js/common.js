@@ -238,7 +238,9 @@ var comJs = {
                     }
                     comJs.getTable(data.data.items);
                     comJs.getPage(data.data);
-                } else {
+                } else if(data.code == 1000){
+                    window.location.href = '../../login.jsp';
+                }else{
                     alert(data.message);
                 }
             },

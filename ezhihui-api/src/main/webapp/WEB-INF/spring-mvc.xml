@@ -49,6 +49,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/assets/**"/>
+            <mvc:exclude-mapping path="/login"/>
             <bean class="com.ezhihui.www.api.interceptors.UserLoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
