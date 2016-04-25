@@ -28,9 +28,7 @@ import org.springframework.util.CollectionUtils;
 import com.google.gson.Gson;
 
 /**
- *
  * @author lxq
- *
  */
 @Service("redisService")
 public class RedisService {
@@ -59,7 +57,6 @@ public class RedisService {
     private RedisTemplate<Serializable, Serializable> redisTemplate;
 
     /**
-     *
      * @param pattern
      * @return
      * @deprecated
@@ -182,7 +179,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param hkey
      * @return
@@ -193,7 +189,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param hkey
      * @return
@@ -205,7 +200,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param hkey
      * @return
@@ -217,7 +211,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param hkey
      * @return
@@ -229,7 +222,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param hkey
      * @return
@@ -241,7 +233,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param hkey
      * @param hvalue
@@ -252,7 +243,7 @@ public class RedisService {
     }
 
 	/*
-	 * public void mputAll(Serializable key, Map<? extends Serializable, ?
+     * public void mputAll(Serializable key, Map<? extends Serializable, ?
 	 * extends Serializable> map) { hashOps.putAll(key, map); }
 	 */
 
@@ -262,7 +253,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param hkey
      */
@@ -271,7 +261,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param hkeys
      * @return
@@ -287,7 +276,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @return
      */
@@ -304,7 +292,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @return
      */
@@ -322,7 +309,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @return
      */
@@ -340,7 +326,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @return
      */
@@ -358,7 +343,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @return
      */
@@ -376,7 +360,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param hkey
      * @return
@@ -386,7 +369,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param value
      */
@@ -396,7 +378,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param value
      * @param timeout
@@ -408,11 +389,11 @@ public class RedisService {
 
     public String get(String key) {
         Serializable value = valueOps.get(key);
-        if(value == null) {
+        if (value == null) {
             return null;
         }
 
-        String v = (String)value;
+        String v = (String) value;
 
         return v;
     }
@@ -429,7 +410,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param v
      */
@@ -470,7 +450,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      */
     public void delete(Serializable key) {
@@ -478,7 +457,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param timeout
      * @param unit
@@ -488,7 +466,6 @@ public class RedisService {
     }
 
     /**
-     *
      * @param key
      * @param date
      */

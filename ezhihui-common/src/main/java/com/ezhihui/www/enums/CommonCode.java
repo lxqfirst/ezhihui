@@ -9,7 +9,8 @@ public enum CommonCode implements Serializable {
 
     SUCCESS(0, "成功"),
     PARAM_ERROR(1, "参数错误"),
-    SALAY_PARAM_ERROR(1, "薪水设置有误");
+    SALAY_PARAM_ERROR(1, "薪水设置有误"),
+    ACCOUNT_PWD_ERROR(1000, "用户名密码错误");
 
     public final int code;
     public final String message;

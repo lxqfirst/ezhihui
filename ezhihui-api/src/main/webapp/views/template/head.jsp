@@ -18,13 +18,13 @@
 
             <!--右边导航栏-->
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"> hello,<span id="username"></span> </a></li>
+                <li><a href="#"> 你好,<span id="username"></span> </a></li>
                 <li class="dropdown"><a href="#" class="dropdown-toggle"
                                         data-toggle="dropdown" role="button" aria-haspopup="true"
                                         aria-expanded="false"> 设置 <span class="caret"> </span>
                 </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/user/logout"> 注销 </a></li>
+                        <li><a href="/logout"> 注销 </a></li>
                     </ul>
                 </li>
             </ul>

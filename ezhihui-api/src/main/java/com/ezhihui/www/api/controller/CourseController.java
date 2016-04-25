@@ -1,5 +1,6 @@
 package com.ezhihui.www.api.controller;
 
+import com.ezhihui.www.api.annotations.Login;
 import com.ezhihui.www.api.view.CourseView;
 import com.ezhihui.www.domain.BatchStudent;
 import com.ezhihui.www.domain.Course;
@@ -33,6 +34,7 @@ public class CourseController extends BaseController {
 
     @RequestMapping(value = "/getList", method = RequestMethod.GET)
     @ResponseBody
+    @Login
     public PageListResponse<Course> getList(@ModelAttribute Course course) {
         return this.courseService.getList(course);
     }
