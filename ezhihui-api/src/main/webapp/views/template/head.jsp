@@ -44,7 +44,7 @@
                 async: false,
                 contentType: "application/json",
                 success: function (data) {
-                    if (data.code == 0) {
+                    if (data.code == 1000 || data.code === 0) {
                         window.location.href = '../../login.jsp';
                     } else {
                         alert(data.message);

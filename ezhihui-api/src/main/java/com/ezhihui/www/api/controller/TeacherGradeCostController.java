@@ -1,5 +1,6 @@
 package com.ezhihui.www.api.controller;
 
+import com.ezhihui.www.api.annotations.Login;
 import com.ezhihui.www.api.view.CostView;
 import com.ezhihui.www.api.view.CourseView;
 import com.ezhihui.www.domain.App;
@@ -28,6 +29,7 @@ public class TeacherGradeCostController extends BaseController {
 
     @RequestMapping(value = "/getTeacherSalaryList", method = RequestMethod.GET)
     @ResponseBody
+    @Login
     public PageListResponse<Teacher> getById(@RequestParam("startTimeStr") String startTimeStr, @RequestParam("endTimeStr") String endTimeStr, @RequestParam(value = "teacherId", required = false) Integer teacherId) {
         return this.teacherGradeCostService.calcTeacherSalary(startTimeStr, endTimeStr, teacherId);
     }
@@ -44,6 +46,7 @@ public class TeacherGradeCostController extends BaseController {
 
     @RequestMapping(value = "/getList", method = RequestMethod.GET)
     @ResponseBody
+    @Login
     public BaseResponse<List<TeacherGradeCost>> getList(@RequestParam("teacherId") Integer teacherId) {
         TeacherGradeCost cost = new TeacherGradeCost();
         cost.setTeacherId(teacherId);
@@ -52,6 +55,7 @@ public class TeacherGradeCostController extends BaseController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
+    @Login
     public BaseResponse<Boolean> update(@RequestParam("teacherId") Integer teacherId,
                                         @RequestParam(value = "gradeIds", required = false) String gradeIds,
                                         @RequestParam(value = "costs", required = false) String costs) {
@@ -74,6 +78,7 @@ public class TeacherGradeCostController extends BaseController {
     }
 
     @RequestMapping(value = "/exportCost", method = RequestMethod.GET)
+    @Login
     public ModelAndView exportDrivers(@RequestParam("startTimeStr") String startTimeStr, @RequestParam("endTimeStr") String endTimeStr, @RequestParam(value = "teacherId", required = false) Integer teacherId) {
         PageListResponse<Teacher> result = this.teacherGradeCostService.calcTeacherSalary(startTimeStr, endTimeStr, teacherId);
         CostView view = new CostView();
@@ -82,6 +87,7 @@ public class TeacherGradeCostController extends BaseController {
 
 
     @RequestMapping(value = "/courseView", method = RequestMethod.GET)
+    @Login
     public ModelAndView courseView(@RequestParam("startTimeStr") String startTimeStr, @RequestParam("endTimeStr") String endTimeStr, @RequestParam(value = "teacherId") Integer teacherId) {
         ModelAndView modelAndView = new ModelAndView("/template/cost/cost_course_query");
         modelAndView.addObject("startTimeStr", startTimeStr);

@@ -1,8 +1,10 @@
 package com.ezhihui.www.api.interceptors;
 
+import com.ezhihui.www.api.annotations.Login;
 import com.ezhihui.www.api.user.UserHolder;
 import com.ezhihui.www.auth.AuthManager;
 import com.ezhihui.www.domain.User;
+import com.ezhihui.www.enums.RoleEnum;
 import com.ezhihui.www.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
@@ -28,16 +30,16 @@ public abstract class BaseInterceptor extends HandlerInterceptorAdapter {
             Annotation[] annotations = handlerMethod.getMethod()
                     .getDeclaredAnnotations();
 
-            if (isNeedLogin(annotations)) {
-                User account = authManager
-                        .getAccount(CookieUtils.getToken(request));
-                if (account != null) {
+            User account = authManager
+                    .getAccount(CookieUtils.getToken(request));
+            if (account != null) {
+                if (!isNeedAdminLogin(annotations) || (isNeedAdminLogin(annotations) && account.getRole() == RoleEnum.ADMIN.value)) {
                     UserHolder.add(account);
                     return true;
                 }
-                CookieUtils.deleteToken(request, response);
-                return this.validate(request, response);
             }
+            CookieUtils.deleteToken(request, response);
+            return this.validate(request, response);
         }
 
         return true;
@@ -61,19 +63,18 @@ public abstract class BaseInterceptor extends HandlerInterceptorAdapter {
      * @param annotations
      * @return
      */
-    private boolean isNeedLogin(Annotation annotations[]) {
-//        if (annotations == null || annotations.length == 0) {
-//            return false;
-//        }
-//
-//        for (Annotation annotation : annotations) {
-//            if (annotation.annotationType().equals(Login.class)) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-        return true;
+    private boolean isNeedAdminLogin(Annotation annotations[]) {
+        if (annotations == null || annotations.length == 0) {
+            return false;
+        }
+
+        for (Annotation annotation : annotations) {
+            if (annotation.annotationType().equals(Login.class)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void updateSession(String token, HttpServletRequest request,

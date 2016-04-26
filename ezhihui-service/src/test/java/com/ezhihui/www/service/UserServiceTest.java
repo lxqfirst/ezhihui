@@ -24,13 +24,28 @@ public class UserServiceTest extends BaseTest {
         userService = this.applicationContext.getBean(IUserService.class);
     }
 
-    @Test
+    //@Test
     public void testCreate() {
         User user = new User();
         user.setName("admin");
         user.setPassword(MD5Utils.md5("admin"));
         user.setRole(RoleEnum.ADMIN.value);
         user.setGroup(GroupEnum.ADMIN.value);
+        user.setStatus(StatusEnum.NORMAL.value);
+        user.setCreateTime(new Date());
+        user.setUpdateTime(new Date());
+        BaseResponse<Integer> response = this.userService.create(user);
+
+        Assert.assertNotNull(response.getData());
+    }
+
+    //@Test
+    public void testCreateNormal() {
+        User user = new User();
+        user.setName("normal");
+        user.setPassword(MD5Utils.md5("normal"));
+        user.setRole(RoleEnum.NORMAL.value);
+        user.setGroup(GroupEnum.NORMAL.value);
         user.setStatus(StatusEnum.NORMAL.value);
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
