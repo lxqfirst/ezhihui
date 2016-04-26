@@ -40,6 +40,7 @@
     <script src="${contextPath}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="${contextPath}/assets/js/teacher/teacher.js"></script>
     <script src="${contextPath}/assets/js/valid/valid.js"></script>
+    <script src="${contextPath}/assets/js/jquery.cookie.min.js"></script>
     <!-- 当前页js -->
     <script>
         $(document).ready(function () {
@@ -47,6 +48,7 @@
             teacherManager.createList();
             teacherManager.initSubject();
             $("#teacherManager").addClass('active');
+            $('#username').html($.cookie('userName'));
         });
     </script>
 </head>

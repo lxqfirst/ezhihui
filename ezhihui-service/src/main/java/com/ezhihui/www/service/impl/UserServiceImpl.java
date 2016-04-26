@@ -29,4 +29,10 @@ public class UserServiceImpl implements IUserService {
 
         return new BaseResponse<>(null);
     }
+
+    @Override
+    public BaseResponse<Integer> create(User user) {
+        int rows = this.userDAO.insertSelective(user);
+        return new BaseResponse<>(rows);
+    }
 }

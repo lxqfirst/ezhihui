@@ -17,11 +17,11 @@ public class User {
 
     private String password;
 
-    private Byte role;
+    private Integer role;
 
-    private Byte group;
+    private Integer group;
 
-    private Byte status;
+    private Integer status;
 
     private Date createTime;
 

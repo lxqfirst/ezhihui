@@ -39,6 +39,7 @@
     <script src="${contextPath}/assets/js/bootstrap-datetimepicker.js"></script>
     <script src="${contextPath}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="${contextPath}/assets/js/valid/valid.js"></script>
+    <script src="${contextPath}/assets/js/jquery.cookie.min.js"></script>
     <!-- 当前页js -->
     <script>
         $(document).ready(function () {
@@ -51,6 +52,7 @@
             comJs.setParams(ss);
             comJs.createTable(1);
             $("#costManager").addClass('active');
+            $('#username').html($.cookie('userName'));
         });
 
         function download() {

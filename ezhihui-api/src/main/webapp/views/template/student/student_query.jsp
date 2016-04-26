@@ -40,6 +40,8 @@
     <script src="${contextPath}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="${contextPath}/assets/js/student/student.js"></script>
     <script src="${contextPath}/assets/js/valid/valid.js"></script>
+    <script src="${contextPath}/assets/js/jquery.cookie.min.js"></script>
+
     <!-- 当前页js -->
     <script>
         $(document).ready(function () {
@@ -47,6 +49,7 @@
             studentManager.createList();
             studentManager.initGrade();
             $("#studentManager").addClass('active');
+            $('#username').html($.cookie('userName'));
         });
     </script>
 </head>

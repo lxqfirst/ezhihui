@@ -57,7 +57,7 @@ public class AuthManagerImpl implements AuthManager {
             return null;
         }
 
-        if (password.equals(MD5Utils.md5(account.getPassword()))) {
+        if (MD5Utils.md5(password).equals(account.getPassword())) {
             return account;
         }
         return null;

@@ -65,8 +65,8 @@
             course.initStudentWithoutHttp("studentNew");
 
             $("#courseManager").addClass('active');
-
             $('#username').html($.cookie('userName'));
+
         });
     </script>
 </head>

@@ -8,4 +8,6 @@ import com.ezhihui.www.response.BaseResponse;
  */
 public interface IUserService {
     BaseResponse<User> getByName(String name);
+
+    BaseResponse<Integer> create(User user);
 }

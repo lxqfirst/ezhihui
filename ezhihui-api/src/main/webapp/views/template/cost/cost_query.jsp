@@ -40,6 +40,7 @@
     <script src="${contextPath}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="${contextPath}/assets/js/cost/cost.js"></script>
     <script src="${contextPath}/assets/js/valid/valid.js"></script>
+    <script src="${contextPath}/assets/js/jquery.cookie.min.js"></script>
 
     <!-- 当前页js -->
     <script>
@@ -63,6 +64,7 @@
             costManager.createList();
             costManager.initGrade();
             $("#costManager").addClass('active');
+            $('#username').html($.cookie('userName'));
         });
     </script>
 </head>
