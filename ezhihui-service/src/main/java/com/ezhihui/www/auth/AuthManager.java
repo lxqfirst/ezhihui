@@ -1,6 +1,6 @@
 package com.ezhihui.www.auth;
 
-import com.ezhihui.www.domain.Account;
+import com.ezhihui.www.domain.User;
 
 
 /**
@@ -24,7 +24,7 @@ public interface AuthManager {
      * @param token
      * @return
      */
-    public Account getAccount(String token);
+    public User getAccount(String token);
 
     /**
      * 更新token时间
@@ -38,5 +38,5 @@ public interface AuthManager {
      *
      * @param user
      */
-    void logout(Account user);
+    void logout(User user);
 }

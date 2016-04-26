@@ -10,13 +10,22 @@ import java.util.Date;
  */
 @Setter
 @Getter
-public class Account {
+public class User {
     private Integer id;
+
     private String name;
+
     private String password;
-    private Integer type;
-    private Integer status;
-    private Date gmtCreated;
-    private Date gmtModified;
+
+    private Byte role;
+
+    private Byte group;
+
+    private Byte status;
+
+    private Date createTime;
+
+    private Date updateTime;
+
     private String token;
 }

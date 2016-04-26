@@ -1,7 +1,9 @@
 package com.ezhihui.www.auth;
 
-import com.ezhihui.www.domain.Account;
+import com.ezhihui.www.domain.User;
+import com.ezhihui.www.service.IUserService;
 import com.ezhihui.www.service.impl.RedisService;
+import com.ezhihui.www.utils.MD5Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class AuthManagerImpl implements AuthManager {
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private IUserService userService;
+
     public static final String USER_PREFIX = "ezhihui:user:";
     public static final String TOKEN_PREFIX = "ezhihui:token:";
 
@@ -26,7 +31,7 @@ public class AuthManagerImpl implements AuthManager {
 
     @Override
     public String auth(String name, String password) {
-        Account account = getUser(name, password);
+        User account = getUser(name, password);
         if (account == null) {
             return null;
         }
@@ -46,18 +51,23 @@ public class AuthManagerImpl implements AuthManager {
      * @param password
      * @return
      */
-    private Account getUser(String name, String password) {
-        Account account = new Account();
-        account.setName(name);
-        account.setPassword(password);
-        return account;
+    private User getUser(String name, String password) {
+        User account = this.userService.getByName(name).getData();
+        if (account == null) {
+            return null;
+        }
+
+        if (password.equals(MD5Utils.md5(account.getPassword()))) {
+            return account;
+        }
+        return null;
     }
 
 
     @Override
-    public Account getAccount(String token) {
+    public User getAccount(String token) {
         log.info("the token is " + token);
-        Account account = redisService.get(TOKEN_PREFIX + token, Account.class);
+        User account = redisService.get(TOKEN_PREFIX + token, User.class);
         return account;
     }
 
@@ -67,7 +77,7 @@ public class AuthManagerImpl implements AuthManager {
     }
 
     @Override
-    public void logout(Account user) {
+    public void logout(User user) {
         redisService.delete(USER_PREFIX + user.getName());
         redisService.delete(TOKEN_PREFIX + user.getToken());
     }

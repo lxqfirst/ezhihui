@@ -3,7 +3,7 @@ package com.ezhihui.www.api.controller;
 import com.ezhihui.www.api.annotations.Login;
 import com.ezhihui.www.api.user.UserHolder;
 import com.ezhihui.www.auth.AuthManager;
-import com.ezhihui.www.domain.Account;
+import com.ezhihui.www.domain.User;
 import com.ezhihui.www.enums.CommonCode;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.utils.CookieUtils;
@@ -62,7 +62,7 @@ public class UserController extends BaseController {
     @Login
     public BaseResponse<String> logout(HttpServletRequest request,
                                        HttpServletResponse response) {
-        Account account = UserHolder.get();
+        User account = UserHolder.get();
         authManager.logout(account);
         CookieUtils.deleteToken(request, response);
         return new BaseResponse();

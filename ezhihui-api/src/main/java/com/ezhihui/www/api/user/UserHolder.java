@@ -1,6 +1,6 @@
 package com.ezhihui.www.api.user;
 
-import com.ezhihui.www.domain.Account;
+import com.ezhihui.www.domain.User;
 
 /**
  * 用户信息存储
@@ -8,9 +8,9 @@ import com.ezhihui.www.domain.Account;
  * @author lxq
  */
 public class UserHolder {
-    private static ThreadLocal<Account> currentUser = new ThreadLocal<>();
+    private static ThreadLocal<User> currentUser = new ThreadLocal<>();
 
-    public static void add(Account user) {
+    public static void add(User user) {
         currentUser.set(user);
     }
 
@@ -18,7 +18,7 @@ public class UserHolder {
         currentUser.remove();
     }
 
-    public static Account get() {
+    public static User get() {
         return currentUser.get();
     }
 }

@@ -1,9 +1,8 @@
 package com.ezhihui.www.api.interceptors;
 
-import com.ezhihui.www.api.annotations.Login;
 import com.ezhihui.www.api.user.UserHolder;
 import com.ezhihui.www.auth.AuthManager;
-import com.ezhihui.www.domain.Account;
+import com.ezhihui.www.domain.User;
 import com.ezhihui.www.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
@@ -30,7 +29,7 @@ public abstract class BaseInterceptor extends HandlerInterceptorAdapter {
                     .getDeclaredAnnotations();
 
             if (isNeedLogin(annotations)) {
-                Account account = authManager
+                User account = authManager
                         .getAccount(CookieUtils.getToken(request));
                 if (account != null) {
                     UserHolder.add(account);
