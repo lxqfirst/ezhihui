@@ -9,7 +9,7 @@ import java.util.List;
 public class PageList<T> {
     private static int DEFAULT_PAGE_SIZE = 5; // 默认每页显示数量
 
-    private static int DEFAULT_MAX_PAGE_SIZE = 50; // 每页最大显示数量
+    private static int DEFAULT_MAX_PAGE_SIZE = Integer.MAX_VALUE; // 每页最大显示数量
 
     private List<T> items; // 记录集
     private long total; // 总记录数
