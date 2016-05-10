@@ -109,6 +109,7 @@ var course = {
 
     showCreateCourseView: function () {
         course.clearModel();
+        $('#timeNew').val(new Date().Format("yyyy-MM-dd") + " 08:00:00");
         $('#updateButton').hide();
         $('#createButton').show();
         $('#continueButton').show();
@@ -239,7 +240,7 @@ var course = {
 
     showEditView: function ($a) {
         $('#courseTimeNew').val($a.parent().parent().children()[4].innerHTML);
-        $('#timeNew').val($a.parent().parent().children()[5].innerHTML);
+        $('#timeNew').val($a.parent().parent().children()[5].innerHTML + ":00");
         $('#studentNew').val($a.parent().parent().children()[1].innerHTML);
         $('#teacherNew').val($a.parent().parent().children()[2].innerHTML);
 

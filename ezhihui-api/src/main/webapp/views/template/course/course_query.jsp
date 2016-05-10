@@ -41,6 +41,7 @@
     <script src="${contextPath}/assets/js/course/course.js"></script>
     <script src="${contextPath}/assets/js/valid/valid.js"></script>
     <script src="${contextPath}/assets/js/jquery.cookie.min.js"></script>
+    <script src="${contextPath}/assets/js/WdatePicker/WdatePicker.js"></script>
     <!-- 当前页js -->
     <script>
         $(document).ready(function () {
@@ -90,20 +91,22 @@
                     <div class="col-lg-4">
                         <div class="input-group">
                             <span class="input-group-addon">开始时间</span>
-                            <div id="start_time" class="input-group date" data-date-format="yyyy-mm-dd hh:ii">
-                                <input class="form-control" type="text" value="" id="start_time_input">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                            <div id="start_time" class="input-group">
+                                <input type="text" class="input Wdate form-control" style="height: 34px;"
+                                       id="start_time_input"
+                                       onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="bdate"
+                                       onClick="WdatePicker()">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="input-group">
                             <span class="input-group-addon">结束时间</span>
-                            <div id="end_time" class="input-group date" data-date-format="yyyy-mm-dd hh:ii">
-                                <input class="form-control" type="text" value="" id="end_time_input">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                            <div id="end_time" class="input-group">
+                                <input type="text" class="input Wdate form-control" style="height: 34px"
+                                       id="end_time_input"
+                                       onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="bdate"
+                                       onClick="WdatePicker()">
                             </div>
                         </div>
                     </div>
@@ -290,12 +293,11 @@
                             <div class="col-lg-8">
                                 <div class="input-group">
                                     <span class="input-group-addon">上课时间</span>
-                                    <div id="" class="input-group date" data-date-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" type="text" value="" id="timeNew" required
-                                               message="上课时间">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                        <span class="input-group-addon"><span
-                                                class="glyphicon glyphicon-th"></span></span>
+                                    <div id="" class="input-group">
+                                        <input type="text" class="input Wdate form-control" style="height: 34px"
+                                               id="timeNew"
+                                               onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="bdate"
+                                               onClick="WdatePicker()" required message="上课时间">
                                     </div>
                                 </div>
                             </div>
