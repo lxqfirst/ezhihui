@@ -53,4 +53,9 @@ public class UserServiceTest extends BaseTest {
 
         Assert.assertNotNull(response.getData());
     }
+
+    @Test
+    public void createPassword(){
+        System.out.println(MD5Utils.md5("lxq.first@163.com"));
+    }
 }
