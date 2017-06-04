@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
-    <title>101网校课程管理平台</title>
+    <title>101培优课程管理平台</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/login.css">
 
@@ -29,7 +29,7 @@
 <div class="container login">
     <div class="login-body">
         <div class="content">
-            <p class="title">101网校课程管理平台</p>
+            <p class="title">101培优课程管理平台</p>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon icon-person"></span>

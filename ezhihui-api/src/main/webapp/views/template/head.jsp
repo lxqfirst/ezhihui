@@ -10,7 +10,7 @@
             <a class="navbar-brand" href="#"
                style="padding:10px 15px; 10px;background: url(${pageContext.request.contextPath}/assets/images/logo.png) no-repeat;width:200px;height:60px;">
             </a> <a class="navbar-brand" style="padding:15px 15px;" href="${contextPath}/course/courseView">
-            101网校课程管理平台</a>
+            101培优课程管理平台</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse"
