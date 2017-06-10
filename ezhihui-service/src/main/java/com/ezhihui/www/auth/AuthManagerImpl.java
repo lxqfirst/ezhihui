@@ -3,6 +3,7 @@ package com.ezhihui.www.auth;
 import com.ezhihui.www.domain.User;
 import com.ezhihui.www.service.IUserService;
 import com.ezhihui.www.service.impl.RedisService;
+import com.ezhihui.www.utils.CookieUtils;
 import com.ezhihui.www.utils.MD5Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class AuthManagerImpl implements AuthManager {
     public static final String USER_PREFIX = "ezhihui:user:";
     public static final String TOKEN_PREFIX = "ezhihui:token:";
 
-    public static final long REDIS_DEFAULT_EXPIRE = 3600 * 4;
+    public static final long REDIS_DEFAULT_EXPIRE = CookieUtils.LIFE_CYCLE;
 
     @Override
     public String auth(String name, String password) {

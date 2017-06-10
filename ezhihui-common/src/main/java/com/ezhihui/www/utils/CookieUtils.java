@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletResponse;
  * Created by lxq on 16/4/25.
  */
 public class CookieUtils {
-    public static final int LIFE_CYCLE = 1800;
+    //session时间设置为24小时
+    public static final int LIFE_CYCLE = 24 * 60 * 60;
     //public static String DOMAIN = ".ezhihui101.com";
 
     public CookieUtils() {
