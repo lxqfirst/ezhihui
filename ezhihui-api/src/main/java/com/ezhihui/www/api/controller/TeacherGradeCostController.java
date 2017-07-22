@@ -16,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by lxq on 16/1/22.
@@ -67,7 +69,15 @@ public class TeacherGradeCostController extends BaseController {
         String[] gradeIdsArray = gradeIds.split(",");
         String[] costsArray = costs.split(",");
 
+        Set<String> set = new HashSet<>();
         for (int i = 0; i < gradeIdsArray.length; i++) {
+            String key = teacherId + gradeIdsArray[i] + costsArray[i];
+            if (set.contains(key)) {
+                continue;
+            } else {
+                set.add(key);
+            }
+
             TeacherGradeCost tmp = new TeacherGradeCost();
             tmp.setTeacherId(teacherId);
             tmp.setGradeId(Integer.valueOf(gradeIdsArray[i]));
