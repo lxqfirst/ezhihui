@@ -107,6 +107,19 @@ var course = {
         course.createList();
     },
 
+    setLastMonth: function () {
+        var startDate = new Date();
+        startDate.setDate(1);
+        startDate.setMonth(startDate.getMonth() - 1);
+        $('#start_time_input').val(startDate.Format("yyyy-MM-dd") + " 08:00:00");
+
+        var endDate = new Date();
+        endDate.setDate(1);
+        endDate.setDate(endDate.getDate() - 1);
+        $('#end_time_input').val(endDate.Format("yyyy-MM-dd") + " 23:00:00");
+        course.createList();
+    },
+
     showCreateCourseView: function () {
         course.clearModel();
         $('#timeNew').val(new Date().Format("yyyy-MM-dd") + " 08:00:00");

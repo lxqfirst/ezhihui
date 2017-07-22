@@ -226,6 +226,16 @@
                     <div class="col-lg-1">
                         <div>
                             <button type="button" class="btn btn-info"
+                                    aria-label="Right Align"
+                                    onclick="course.setLastMonth()">
+									<span class="glyphicon glyphicon-calendar" aria-hidden="true">
+									</span> 上月
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div>
+                            <button type="button" class="btn btn-info"
                                     aria-label="Right Align" onclick="window.location.href='/course/batchView'">
 									<span class="glyphicon glyphicon-star" aria-hidden="true">
 									</span> 批量
