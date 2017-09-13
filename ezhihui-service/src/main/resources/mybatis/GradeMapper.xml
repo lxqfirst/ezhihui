@@ -80,4 +80,23 @@
             )
         AND tb_student.grade = tb_grade.id
     </select>
+
+    <select id="getGradeIdsByTeacherId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT DISTINCT
+        (tb_grade.id)
+        FROM
+        tb_student,
+        tb_grade
+        WHERE
+        tb_student.id IN (
+        SELECT
+        student_id
+        FROM
+        tb_course
+        WHERE
+        teacher_id = #{teacherId,jdbcType=INTEGER}
+        AND STATUS = 1
+        )
+        AND tb_student.grade = tb_grade.id
+    </select>
 </mapper>

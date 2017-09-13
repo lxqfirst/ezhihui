@@ -9,6 +9,7 @@ import com.ezhihui.www.domain.Teacher;
 import com.ezhihui.www.domain.TeacherGradeCost;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.response.PageListResponse;
+import com.ezhihui.www.service.IGradeService;
 import com.ezhihui.www.service.ITeacherGradeCostService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ import java.util.Set;
 public class TeacherGradeCostController extends BaseController {
     @Autowired
     private ITeacherGradeCostService teacherGradeCostService;
+
+    @Autowired
+    private IGradeService gradeService;
 
     @RequestMapping(value = "/getTeacherSalaryList", method = RequestMethod.GET)
     @ResponseBody
@@ -61,18 +65,21 @@ public class TeacherGradeCostController extends BaseController {
     public BaseResponse<Boolean> update(@RequestParam("teacherId") Integer teacherId,
                                         @RequestParam(value = "gradeIds", required = false) String gradeIds,
                                         @RequestParam(value = "costs", required = false) String costs) {
-        teacherGradeCostService.deleteByTeacherId(teacherId);
 
         if (StringUtils.isBlank(gradeIds) || StringUtils.isBlank(costs)) {
             return new BaseResponse<>(Boolean.TRUE);
         }
+
+        teacherGradeCostService.deleteByTeacherId(teacherId);
+        BaseResponse<List<Integer>> gradeIdsByTeacherId = this.gradeService.getGradeIdsByTeacherId(teacherId);
+
         String[] gradeIdsArray = gradeIds.split(",");
         String[] costsArray = costs.split(",");
 
         Set<String> set = new HashSet<>();
         for (int i = 0; i < gradeIdsArray.length; i++) {
             String key = teacherId + gradeIdsArray[i] + costsArray[i];
-            if (set.contains(key)) {
+            if (set.contains(key) || !gradeIdsByTeacherId.getData().contains(Integer.valueOf(gradeIdsArray[i]))) {
                 continue;
             } else {
                 set.add(key);

@@ -20,4 +20,6 @@ public interface GradeDAO {
     List<Grade> getAll();
 
     List<String> getGradeNameByTeacherId(Integer teacherId);
+
+    List<Integer> getGradeIdsByTeacherId(Integer teacherId);
 }
