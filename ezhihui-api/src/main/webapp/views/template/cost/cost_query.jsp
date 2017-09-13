@@ -219,8 +219,8 @@
                     <button type="button" class="btn btn-info" onclick="costManager.create()" id="continueButton">
                         保存
                     </button>
-                    <button type="button" class="btn btn-default" onclick="costManager.hideModel()">取消
-                    </button>
+                    <%--<button type="button" class="btn btn-default" onclick="costManager.hideModel()">取消--%>
+                    <%--</button>--%>
                 </div>
             </div>
             <!-- /.modal-content -->

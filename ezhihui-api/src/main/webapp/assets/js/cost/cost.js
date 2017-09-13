@@ -74,6 +74,7 @@ var costManager = {
     },
 
     showEditView: function ($a) {
+        costManager.clearModel();
         currentTeacherId = $a.parent().parent()[0].id;
         var result = comJs.getSync("/cost/getList?teacherId=" + currentTeacherId);
         $.each(result, function (n, value) {
