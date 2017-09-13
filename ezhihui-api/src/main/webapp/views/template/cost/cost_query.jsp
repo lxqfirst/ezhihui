@@ -39,6 +39,7 @@
     <script src="${contextPath}/assets/js/bootstrap-datetimepicker.js"></script>
     <script src="${contextPath}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="${contextPath}/assets/js/cost/cost.js"></script>
+    <script src="${contextPath}/assets/js/course/course.js"></script>
     <script src="${contextPath}/assets/js/valid/valid.js"></script>
     <script src="${contextPath}/assets/js/jquery.cookie.min.js"></script>
     <script src="${contextPath}/assets/js/WdatePicker/WdatePicker.js"></script>
@@ -140,6 +141,16 @@
                                     onclick="costManager.download()">
 									<span class="glyphicon glyphicon-download" aria-hidden="true">
 									</span> 下载
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div>
+                            <button type="button" class="btn btn-info"
+                                    aria-label="Right Align"
+                                    onclick="course.setLastMonth()">
+									<span class="glyphicon glyphicon-calendar" aria-hidden="true">
+									</span> 上月
                             </button>
                         </div>
                     </div>
