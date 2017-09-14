@@ -2,6 +2,7 @@ package com.ezhihui.www.api.controller;
 
 import com.ezhihui.www.domain.App;
 import com.ezhihui.www.domain.Grade;
+import com.ezhihui.www.dto.GradeDto;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.service.IAppService;
 import com.ezhihui.www.service.IGradeService;
@@ -31,7 +32,10 @@ public class GradeController extends BaseController {
 
     @RequestMapping(value = "/getGradeNameByTeacherId", method = RequestMethod.GET)
     @ResponseBody
-    public BaseResponse<List<String>> getGradeNameByTeacherId(@RequestParam("teacherId") Integer teacherId) {
-        return this.gradeService.getGradeNameByTeacherId(teacherId);
+    public BaseResponse<List<String>> getGradeNameByTeacherId(@RequestParam("teacherId") Integer teacherId,
+                                                              @RequestParam("startTime") String startTime,
+                                                              @RequestParam("endTime") String endTime) {
+        GradeDto dto = new GradeDto(teacherId, startTime, endTime);
+        return this.gradeService.getGradeNameByTeacherId(dto);
     }
 }

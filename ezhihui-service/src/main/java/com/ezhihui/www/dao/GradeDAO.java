@@ -1,6 +1,7 @@
 package com.ezhihui.www.dao;
 
 import com.ezhihui.www.domain.Grade;
+import com.ezhihui.www.dto.GradeDto;
 
 import java.util.List;
 
@@ -19,7 +20,5 @@ public interface GradeDAO {
 
     List<Grade> getAll();
 
-    List<String> getGradeNameByTeacherId(Integer teacherId);
-
-    List<Integer> getGradeIdsByTeacherId(Integer teacherId);
+    List<String> getGradeNameByTeacherId(GradeDto dto);
 }

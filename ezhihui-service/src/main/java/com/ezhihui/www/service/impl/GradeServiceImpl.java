@@ -2,6 +2,7 @@ package com.ezhihui.www.service.impl;
 
 import com.ezhihui.www.dao.GradeDAO;
 import com.ezhihui.www.domain.Grade;
+import com.ezhihui.www.dto.GradeDto;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.service.IGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,8 @@ public class GradeServiceImpl implements IGradeService {
     }
 
     @Override
-    public BaseResponse<List<String>> getGradeNameByTeacherId(Integer teacherId) {
-        List<String> result = this.gradeDAO.getGradeNameByTeacherId(teacherId);
+    public BaseResponse<List<String>> getGradeNameByTeacherId(GradeDto dto) {
+        List<String> result = this.gradeDAO.getGradeNameByTeacherId(dto);
         return new BaseResponse<>(result);
-    }
-
-    @Override
-    public BaseResponse<List<Integer>> getGradeIdsByTeacherId(Integer teacherId) {
-        return new BaseResponse<>(this.gradeDAO.getGradeIdsByTeacherId(teacherId));
     }
 }

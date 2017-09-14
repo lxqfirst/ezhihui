@@ -71,15 +71,13 @@ public class TeacherGradeCostController extends BaseController {
         }
 
         teacherGradeCostService.deleteByTeacherId(teacherId);
-        BaseResponse<List<Integer>> gradeIdsByTeacherId = this.gradeService.getGradeIdsByTeacherId(teacherId);
-
         String[] gradeIdsArray = gradeIds.split(",");
         String[] costsArray = costs.split(",");
 
         Set<String> set = new HashSet<>();
         for (int i = 0; i < gradeIdsArray.length; i++) {
             String key = teacherId + gradeIdsArray[i] + costsArray[i];
-            if (set.contains(key) || !gradeIdsByTeacherId.getData().contains(Integer.valueOf(gradeIdsArray[i]))) {
+            if (set.contains(key)) {
                 continue;
             } else {
                 set.add(key);

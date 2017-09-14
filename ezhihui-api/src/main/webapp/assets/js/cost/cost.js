@@ -80,7 +80,8 @@ var costManager = {
         $.each(result, function (n, value) {
             costManager.modelAdd(value);
         });
-        var grades = comJs.getSync("/grade/getGradeNameByTeacherId?teacherId=" + currentTeacherId);
+        var grades = comJs.getSync("/grade/getGradeNameByTeacherId?teacherId=" + currentTeacherId +
+            "&startTime=" + $('#start_time_input').val() + "&endTime=" + $('#end_time_input').val());
         var gradeText = '';
         $.each(grades, function (n, value) {
             gradeText += "," + value;
