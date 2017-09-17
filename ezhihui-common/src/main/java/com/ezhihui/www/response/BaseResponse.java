@@ -26,4 +26,10 @@ public class BaseResponse<T> extends BaseResult implements Serializable {
         super();
         this.setData(data);
     }
+
+    public BaseResponse(int code, String message, T data) {
+        super.setCode(code);
+        super.setMessage(message);
+        this.setData(data);
+    }
 }
