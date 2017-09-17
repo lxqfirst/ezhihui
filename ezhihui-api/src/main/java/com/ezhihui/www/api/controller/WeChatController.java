@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
 /**
@@ -19,7 +21,12 @@ public class WeChatController {
 
     @RequestMapping(value = "/getToken", method = RequestMethod.GET)
     @ResponseBody
-    public String getToken(@RequestParam("signature") String signature, @RequestParam("echostr") String echostr, @RequestParam("timestamp") String timestamp, @RequestParam("nonce") String nonce) {
+    public String getToken(HttpServletRequest request, HttpServletResponse response, @RequestParam("signature") String signature,
+                           @RequestParam(value = "echostr", required = false) String echostr,
+                           @RequestParam(value = "openid", required = false) String openid,
+                           @RequestParam("timestamp") String timestamp,
+                           @RequestParam("nonce") String nonce) {
+
 
         String[] arr = new String[]{WECHAT_TOEN, timestamp, nonce};
         Arrays.sort(arr);
