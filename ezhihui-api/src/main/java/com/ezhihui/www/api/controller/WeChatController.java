@@ -1,5 +1,6 @@
 package com.ezhihui.www.api.controller;
 
+import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.service.IWechatServive;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -43,7 +44,8 @@ public class WeChatController {
 
         if (temp.equalsIgnoreCase(signature)) {
             if (StringUtils.isEmpty(echostr)) {
-                return this.wechatServive.wechatMessageProcess(request).getData();
+                BaseResponse<String> baseResponse = this.wechatServive.wechatMessageProcess(request);
+                return baseResponse.getData();
             }
             return echostr;
         }
