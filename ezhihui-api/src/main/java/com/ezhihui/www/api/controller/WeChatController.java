@@ -19,7 +19,7 @@ import java.util.Arrays;
 public class WeChatController {
     private static final String WECHAT_TOEN = "4391fd2545b14c64b52511fdd0f2";
 
-    @RequestMapping(value = "/getToken", method = RequestMethod.GET)
+    @RequestMapping(value = "/getToken")
     @ResponseBody
     public String getToken(HttpServletRequest request, HttpServletResponse response, @RequestParam("signature") String signature,
                            @RequestParam(value = "echostr", required = false) String echostr,
