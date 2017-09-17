@@ -1,6 +1,9 @@
 package com.ezhihui.www.api.controller;
 
+import com.ezhihui.www.service.IWechatServive;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +22,9 @@ import java.util.Arrays;
 public class WeChatController {
     private static final String WECHAT_TOEN = "4391fd2545b14c64b52511fdd0f2";
 
+    @Autowired
+    private IWechatServive wechatServive;
+
     @RequestMapping(value = "/getToken")
     @ResponseBody
     public String getToken(HttpServletRequest request, HttpServletResponse response, @RequestParam("signature") String signature,
@@ -36,6 +42,9 @@ public class WeChatController {
         String temp = DigestUtils.shaHex(content);
 
         if (temp.equalsIgnoreCase(signature)) {
+            if (StringUtils.isEmpty(echostr)) {
+                return this.wechatServive.wechatMessageProcess(request).getData();
+            }
             return echostr;
         }
 
