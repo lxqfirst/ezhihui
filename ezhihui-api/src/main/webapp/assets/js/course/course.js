@@ -87,7 +87,35 @@ var course = {
             "status": status
         };
         comJs.setParams(ss);
-        comJs.createTable(1);
+        comJs.createTable(1, course);
+    },
+
+    callback: function () {
+        var initTimeText = "";
+        var count = 0;
+        var color = "#f0f0ff";
+        var trs = $("#page_table tr");
+        for (var i = 1; i < trs.length; i++) {
+            var tr = trs.get(i);
+            var timeText = tr.children[5].innerText;
+
+            if (timeText != initTimeText && count == 0) {
+                $(tr).css("background-color", color);
+                initTimeText = timeText;
+                count = 1;
+                continue;
+            }
+
+            if (timeText == initTimeText && count == 1) {
+                $(tr).css("background-color", color);
+                continue;
+            }
+
+            if (timeText != initTimeText && count == 1) {
+                initTimeText = timeText;
+                count = 0;
+            }
+        }
     },
 
     setToday: function () {

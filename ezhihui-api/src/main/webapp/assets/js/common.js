@@ -221,7 +221,7 @@ var comJs = {
      *
      * @param pageIndex
      */
-    createTable: function (pageIndex) {
+    createTable: function (pageIndex, callback) {
         var getTimestamp = new Date().getTime();
         COM_PARAMS_GETLIST.pageIndex = pageIndex;
         COM_URL_GETLIST = $("#page_table").attr("table_url") + "?pageIndex="
@@ -242,15 +242,20 @@ var comJs = {
 
                     $("#page_table tr").hover(function () {
                         if (this.id != "trid") {
+                            color = $(this).css("background-color");
                             $(this).css("background-color", "#77DDFF");
                         }
                     }, function () {
-                        $(this).css("background-color", "");
+                        $(this).css("background-color", color);
                     });
                 } else if (data.code == 1000) {
                     window.location.href = '../../login.jsp';
                 } else {
                     alert(data.message);
+                }
+
+                if (callback != undefined) {
+                    callback.callback();
                 }
             },
             error: function () {
