@@ -93,7 +93,7 @@ var comJs = {
         datetime.setTime(gmtTime);
         var year = datetime.getFullYear();
         var month = datetime.getMonth() + 1 < 10 ? "0"
-        + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+            + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
         var date = datetime.getDate() < 10 ? "0" + datetime.getDate()
             : datetime.getDate();
         var hour = datetime.getHours() < 10 ? "0" + datetime.getHours()
@@ -238,9 +238,18 @@ var comJs = {
                     }
                     comJs.getTable(data.data.items);
                     comJs.getPage(data.data);
-                } else if(data.code == 1000){
+
+
+                    $("#page_table tr").hover(function () {
+                        if (this.id != "trid") {
+                            $(this).css("background-color", "#77DDFF");
+                        }
+                    }, function () {
+                        $(this).css("background-color", "");
+                    });
+                } else if (data.code == 1000) {
                     window.location.href = '../../login.jsp';
-                }else{
+                } else {
                     alert(data.message);
                 }
             },
