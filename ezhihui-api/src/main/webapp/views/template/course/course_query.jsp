@@ -261,6 +261,7 @@
                             <input type="checkbox" id="checkAll" class="check" onchange="course.checkAll()"/>
                         </th>
                         <th id='studentName' style="text-align:center;">学生</th>
+                        <th id='gradeName' style="text-align:center;">年级</th>
                         <th id='teacherName' sty
                             le="text-align:center;">教师
                         </th>
@@ -292,7 +293,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true">&times;</button>
+                            aria-hidden="true">&times;
+                    </button>
                     <h4 class="modal-title" id="myModalLabel">课程设置</h4>
                 </div>
 

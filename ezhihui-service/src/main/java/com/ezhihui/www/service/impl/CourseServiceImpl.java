@@ -1,8 +1,10 @@
 package com.ezhihui.www.service.impl;
 
 import com.ezhihui.www.dao.CourseDAO;
+import com.ezhihui.www.dao.GradeDAO;
 import com.ezhihui.www.domain.BatchStudent;
 import com.ezhihui.www.domain.Course;
+import com.ezhihui.www.domain.Grade;
 import com.ezhihui.www.enums.CourseStatusEnum;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.response.PageList;
@@ -29,6 +31,9 @@ import java.util.Map;
 public class CourseServiceImpl implements ICourseService {
     @Autowired
     private CourseDAO courseDAO;
+
+    @Autowired
+    private GradeDAO gradeDAO;
 
     @Override
     public BaseResponse<Integer> create(Course course) {
@@ -135,6 +140,12 @@ public class CourseServiceImpl implements ICourseService {
             result.setData(null);
             return result;
         }
+
+        for (int i = 0; i < list.size(); i++) {
+            Grade grade = gradeDAO.selectByPrimaryKey(list.get(i).getGradeId().intValue());
+            list.get(i).setGradeName(grade.getGradeName());
+        }
+
         pageList.setList(list);
         pageList.setPageIndex(1);
         pageList.setPageSize(list.size());

@@ -43,4 +43,6 @@ public class Course {
     private String signString;
 
     private Long gradeId;
+
+    private String gradeName;
 }
