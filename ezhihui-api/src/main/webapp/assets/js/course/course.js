@@ -97,7 +97,7 @@ var course = {
         var trs = $("#page_table tr");
         for (var i = 1; i < trs.length; i++) {
             var tr = trs.get(i);
-            var timeText = tr.children[5].innerText;
+            var timeText = tr.children[6].innerText;
 
             if (timeText != initTimeText && count == 0) {
                 $(tr).css("background-color", color);
