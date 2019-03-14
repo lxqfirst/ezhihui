@@ -280,13 +280,13 @@ var course = {
     },
 
     showEditView: function ($a) {
-        $('#courseTimeNew').val($a.parent().parent().children()[4].innerHTML);
-        $('#timeNew').val($a.parent().parent().children()[5].innerHTML + ":00");
+        $('#courseTimeNew').val($a.parent().parent().children()[5].innerHTML);
+        $('#timeNew').val($a.parent().parent().children()[6].innerHTML + ":00");
         $('#studentNew').val($a.parent().parent().children()[1].innerHTML);
-        $('#teacherNew').val($a.parent().parent().children()[2].innerHTML);
+        $('#teacherNew').val($a.parent().parent().children()[3].innerHTML);
 
         if ($a.parent().parent().children()[6].innerHTML != "-")
-            $('#classroomNew').val($a.parent().parent().children()[6].innerHTML);
+            $('#classroomNew').val($a.parent().parent().children()[7].innerHTML);
         currentCourseId = $a.parent().parent()[0].id;
 
         $('#updateButton').show();
