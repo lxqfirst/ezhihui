@@ -264,20 +264,26 @@ var batchManager = {
                 case 13:
                     row = 2;
                     break;
-                case 15:
+                case 14:
                     row = 3;
                     break;
-                case 17:
+                case 15:
                     row = 4;
                     break;
-                case 18:
+                case 16:
                     row = 5;
                     break;
-                case 19:
+                case 17:
                     row = 6;
                     break;
-                case 20:
+                case 18:
                     row = 7;
+                    break;
+                case 19:
+                    row = 8;
+                    break;
+                case 20:
+                    row = 9;
                     break;
                 default:
                     row = -1;
