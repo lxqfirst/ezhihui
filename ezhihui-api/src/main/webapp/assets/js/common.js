@@ -238,7 +238,9 @@ var comJs = {
                     }
                     comJs.getTable(data.data.items);
                     comJs.getPage(data.data);
-
+                    if (data.requestId !== null && data.requestId !== undefined) {
+                        $('#pageTotalInfo').text($('#pageTotalInfo').text() + ',' + data.requestId)
+                    }
 
                     $("#page_table tr").hover(function () {
                         if (this.id != "trid") {
@@ -399,7 +401,7 @@ var comJs = {
         // 构建分页信息标签，当前n页，共m页，l条
         var pageTagTop = '';
         pageTagTop += '<div class="bootstrap-admin-panel-content">';
-        pageTagTop += '<nav class="pull-right"><span>当前第' + pageIndex + '页，共'
+        pageTagTop += '<nav class="pull-right"><span id="pageTotalInfo">当前第' + pageIndex + '页，共'
             + totalPageCount + '页,共' + total + '条</span> </nav>';
         pageTagTop += '</div>';
         $("#com_list_msg").empty();

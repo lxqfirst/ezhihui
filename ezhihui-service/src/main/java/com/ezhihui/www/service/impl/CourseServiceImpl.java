@@ -141,9 +141,11 @@ public class CourseServiceImpl implements ICourseService {
             return result;
         }
 
+        double sum = 0;
         for (int i = 0; i < list.size(); i++) {
             Grade grade = gradeDAO.selectByPrimaryKey(list.get(i).getGradeId().intValue());
             list.get(i).setGradeName(grade.getGradeName());
+            sum += list.get(i).getCourseTime();
         }
 
         pageList.setList(list);
@@ -152,6 +154,7 @@ public class CourseServiceImpl implements ICourseService {
         pageList.setTotal(list.size());
 
         result.setData(pageList);
+        result.setRequestId(sum + "课时");
         return result;
     }
 }
