@@ -84,7 +84,8 @@ var course = {
             "endTimeStr": $('#end_time_input').val(),
             "studentId": course.getStudentId('student'),
             "teacherId": course.getTeacherId('teacher'),
-            "status": status
+            "status": status,
+            "courseType": $('#query-type').attr("menu-value")
         };
         comJs.setParams(ss);
         comJs.createTable(1, course);
@@ -179,7 +180,8 @@ var course = {
             "teacherId": course.getTeacherId('teacherNew'),
             "courseTime": $('#courseTimeNew').val(),
             "timeStr": $('#timeNew').val(),
-            "classroom": $('#classroomNew').val()
+            "classroom": $('#classroomNew').val(),
+            "courseType": $('#query-type-window').attr("menu-value")
         };
 
         comJs.post("/course/create", param, "课程新建成功", false);
@@ -209,7 +211,8 @@ var course = {
             "teacherId": course.getTeacherId('teacherNew'),
             "courseTime": $('#courseTimeNew').val(),
             "timeStr": $('#timeNew').val(),
-            "classroom": $('#classroomNew').val()
+            "classroom": $('#classroomNew').val(),
+            "courseType": $('#query-type-window').attr("menu-value")
         };
         comJs.post("/course/update", param, "课程更新成功", false);
         course.clearModel();
@@ -224,6 +227,15 @@ var course = {
             return "<img src='/assets/images/ok.png' style='width:16px' title='已签到'/>";
         }
 
+    },
+    transType: function (courseType) {
+        if (courseType == 1) {
+            return "文化课"
+        }
+
+        if (courseType == 2) {
+            return "美术课"
+        }
     },
 
     transClassroom: function (classroom) {
@@ -287,6 +299,15 @@ var course = {
 
         if ($a.parent().parent().children()[6].innerHTML != "-")
             $('#classroomNew').val($a.parent().parent().children()[7].innerHTML);
+
+        courseType = $a.parent().parent().children()[9].innerHTML
+        if (courseType === '文化课') {
+            $('#query-type-window').html('文化课 <span class="caret"> </span>')
+            $('#query-type-window').attr('menu-value', '1')
+        } else {
+            $('#query-type-window').html('美术课 <span class="caret"> </span>')
+            $('#query-type-window').attr('menu-value', '2')
+        }
         currentCourseId = $a.parent().parent()[0].id;
 
         $('#updateButton').show();
