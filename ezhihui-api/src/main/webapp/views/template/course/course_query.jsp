@@ -157,6 +157,23 @@
                     </div>
                     <!-- /.col-lg-6 -->
 
+                    <div class="col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"> 类型 </span>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button"
+                                        id="query-type" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="true" menu-value="1" menu-text>
+                                    文化课 <span class="caret"> </span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a onclick="comJs.menuOnclick(this)" attrid="1">文化课</a></li>
+                                    <li><a onclick="comJs.menuOnclick(this)" attrid="2">美术课</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /input-group -->
+                    </div>
                 </div>
                 <!-- /.row -->
 
@@ -233,15 +250,15 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-lg-1">
-                        <div>
-                            <button type="button" class="btn btn-info"
-                                    aria-label="Right Align" onclick="window.location.href='/course/batchView'">
-									<span class="glyphicon glyphicon-star" aria-hidden="true">
-									</span> 批量
-                            </button>
-                        </div>
-                    </div>
+                    <%--                    <div class="col-lg-1">--%>
+                    <%--                        <div>--%>
+                    <%--                            <button type="button" class="btn btn-info"--%>
+                    <%--                                    aria-label="Right Align" onclick="window.location.href='/course/batchView'">--%>
+                    <%--									<span class="glyphicon glyphicon-star" aria-hidden="true">--%>
+                    <%--									</span> 批量--%>
+                    <%--                            </button>--%>
+                    <%--                        </div>--%>
+                    <%--                    </div>--%>
                 </div>
             </div>
         </div>
@@ -270,6 +287,7 @@
                         <th id='time' style="text-align:center;" data-options="comJs.formmatDate">上课时间</th>
                         <th id='classroom' style="text-align:center;" data-options="course.transClassroom">教室</th>
                         <th id='status' style="text-align:center;" data-options="course.transStatus">状态</th>
+                        <th id='courseType' style="text-align:center;" data-options="course.transType">类型</th>
                         <th id="course-operation" style="text-align:center;">操作</th>
                     </tr>
                     </thead>
@@ -333,6 +351,23 @@
                                     <span class="input-group-addon"> 教师 </span>
                                     <input id="teacherNew" autocomplete="off" data-provide="typeahead" type="text"
                                            class="form-control" placeholder="" required message="教师"/>
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 类型 </span>
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button"
+                                                id="query-type-window" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="true" menu-value="1" menu-text>文化课 <span class="caret"> </span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a onclick="comJs.menuOnclick(this)" attrid="1">文化课</a></li>
+                                            <li><a onclick="comJs.menuOnclick(this)" attrid="2">美术课</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                                 <!-- /input-group -->
                             </div>
