@@ -45,4 +45,6 @@ public class Course {
     private Long gradeId;
 
     private String gradeName;
+
+    private Integer courseType;
 }
