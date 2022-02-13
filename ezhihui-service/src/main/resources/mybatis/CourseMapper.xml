@@ -12,10 +12,11 @@
         <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
         <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="course_type" property="courseType" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, student_id, teacher_id, subject_id, course_time, time, classroom, add_time, status, 
-    end_time
+    end_time, course_type
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -31,11 +32,11 @@
     insert into tb_course (id, student_id, teacher_id, 
       subject_id, course_time, time, 
       classroom, add_time, status, 
-      end_time)
+      end_time, course_type)
     values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
       #{subjectId,jdbcType=INTEGER}, #{courseTime,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP}, 
       #{classroom,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{endTime,jdbcType=TIMESTAMP})
+      #{endTime,jdbcType=TIMESTAMP}, #{courseType,jdbcType=INTEGER})
   </insert>
     <insert id="insertSelective" parameterType="com.ezhihui.www.domain.Course">
         insert into tb_course
@@ -67,6 +68,9 @@
             <if test="endTime != null">
                 end_time,
             </if>
+            <if test="courseType != null">
+                course_type,
+            </if>
             add_time
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -96,6 +100,9 @@
             </if>
             <if test="endTime != null">
                 #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="courseType != null">
+                #{courseType,jdbcType=TIMESTAMP},
             </if>
             now()
         </trim>
@@ -130,6 +137,9 @@
             <if test="endTime != null">
                 end_time = #{endTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="courseType != null">
+                course_type = #{courseType,jdbcType=TIMESTAMP},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -143,7 +153,8 @@
       classroom = #{classroom,jdbcType=VARCHAR},
       add_time = #{addTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
-      end_time = #{endTime,jdbcType=TIMESTAMP}
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      course_type = #{courseType,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -180,6 +191,9 @@
             </if>
             <if test="status != null">
                 and STATUS = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="courseType != null">
+                and course_type = #{courseType,jdbcType=INTEGER}
             </if>
         </trim>
         ORDER BY TIME
