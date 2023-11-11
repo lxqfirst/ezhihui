@@ -64,6 +64,7 @@ var comJs = {
     appendOpForStudent: function () {
         var opTd = '<td style="text-align:center;">';
         opTd += '<a onclick = studentManager.showEditView($(this)) title="编辑">编辑</a>&nbsp;&nbsp;&nbsp' +
+            '<a onclick = studentManager.showFeeEditView($(this)) title="设置">设置</a>&nbsp;&nbsp;&nbsp' +
             '<a onclick = studentManager.deleteStudent($(this)) title="删除">删除</a>';
         opTd += '</td>';
         return opTd;

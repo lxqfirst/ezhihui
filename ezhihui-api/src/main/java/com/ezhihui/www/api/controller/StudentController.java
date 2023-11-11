@@ -1,16 +1,22 @@
 package com.ezhihui.www.api.controller;
 
-import com.ezhihui.www.domain.Student;
-import com.ezhihui.www.domain.Teacher;
+import com.ezhihui.www.api.annotations.Login;
+import com.ezhihui.www.domain.*;
 import com.ezhihui.www.request.StudentPageRequest;
 import com.ezhihui.www.response.BaseResponse;
 import com.ezhihui.www.response.PageListResponse;
+import com.ezhihui.www.service.IStudentCourseCostRecordService;
+import com.ezhihui.www.service.IStudentCourseCostService;
 import com.ezhihui.www.service.IStudentService;
 import com.ezhihui.www.service.ITeacherService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -21,6 +27,12 @@ import java.util.List;
 public class StudentController extends BaseController {
     @Autowired
     private IStudentService studentService;
+
+    @Autowired
+    private IStudentCourseCostService studentCourseCostService;
+
+    @Autowired
+    private IStudentCourseCostRecordService studentCourseCostRecordService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
@@ -58,6 +70,29 @@ public class StudentController extends BaseController {
         return this.studentService.getPageList(request);
     }
 
+    @RequestMapping(value = "/getFeeConfigList", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse<List<StudentCourseCostConfig>> getFeeList(@ModelAttribute @RequestParam("studentId") Integer studentId) {
+        return this.studentCourseCostService.getByStudentId(studentId);
+    }
+
+    @RequestMapping(value = "/saveBatchFeeConfig", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse<Integer> saveBatchFeeConfig(@RequestParam("feeConfigInfo") String feeConfigInfo) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<StudentCourseCostConfig>>() {
+        }.getType();
+        List<StudentCourseCostConfig> configList = gson.fromJson(feeConfigInfo, listType);
+
+        return this.studentCourseCostService.insertOrUpdateList(configList);
+    }
+
+    @RequestMapping(value = "/getCostDetailList", method = RequestMethod.GET)
+    @ResponseBody
+    public PageListResponse<StudentCourseCostRecord> getCostDetailList(@ModelAttribute StudentCourseCostRecord record) {
+        return this.studentCourseCostRecordService.getCostDetailList(record);
+    }
+
     /**
      * view
      *
@@ -66,5 +101,11 @@ public class StudentController extends BaseController {
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String view() {
         return "/template/student/student_query";
+    }
+
+    @RequestMapping(value = "/costDetailView", method = RequestMethod.GET)
+    @Login
+    public ModelAndView courseView() {
+        return new ModelAndView("/template/student/student_cost_course_query");
     }
 }

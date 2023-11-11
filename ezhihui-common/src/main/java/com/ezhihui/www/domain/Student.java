@@ -12,6 +12,8 @@ public class Student {
 
     private Integer grade;
 
+    private Integer fund;
+
     private String className;
 
     private String school;

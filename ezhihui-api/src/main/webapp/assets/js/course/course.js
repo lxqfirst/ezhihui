@@ -272,22 +272,23 @@ var course = {
 
     signInCourse: function ($a) {
         var id = $a.parent().parent()[0].id;
-        var src = $a.parent().prev().children()[0].src;
+        var src = $a.parent().parent().children()[8].innerHTML;
         var param = {
             id: parseInt(id)
         };
 
-        if (src.endsWith('fail.png')) {
+        if (src.indexOf('fail.png') != -1) {
             param.status = 1;
         } else {
             param.status = 0;
         }
 
         comJs.post("/course/update", param, "操作成功", false);
+        b = $a.parent().parent().children()[8]
         if (param.status == 1) {
-            $a.parent().prev().children()[0].src = '/assets/images/ok.png';
+            b.innerHTML = '<img src="/assets/images/ok.png" style="width:16px" title="已签到">'
         } else {
-            $a.parent().prev().children()[0].src = '/assets/images/fail.png';
+            b.innerHTML = '<img src="/assets/images/fail.png" style="width:16px" title="未签到">'
         }
     },
 

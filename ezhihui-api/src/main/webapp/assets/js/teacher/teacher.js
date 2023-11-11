@@ -5,7 +5,6 @@
 /**
  * 缓存教师信息
  */
-var teacherList = [];
 var teacherMap = {};
 
 var subjectMap = {};
@@ -14,7 +13,7 @@ var currentTeacherId;
 
 var teacherManager = {
     initTeacher: function (id) {
-
+        teacherList = [];
         var url = "/teacher/getList";
         $.ajax({
             url: url,

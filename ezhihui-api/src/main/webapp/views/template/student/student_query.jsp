@@ -41,6 +41,7 @@
     <script src="${contextPath}/assets/js/student/student.js"></script>
     <script src="${contextPath}/assets/js/valid/valid.js"></script>
     <script src="${contextPath}/assets/js/jquery.cookie.min.js"></script>
+    <script src="${contextPath}/assets/js/teacher/teacher.js"></script>
 
     <!-- 当前页js -->
     <script>
@@ -101,6 +102,17 @@
                             </button>
                         </div>
                     </div>
+
+                    <div class="col-lg-1">
+                        <div>
+                            <button type="button" class="btn btn-info"
+                                    aria-label="Left Align"
+                                    onclick="studentManager.costDetail()">
+									<span class="glyphicon glyphicon-search" aria-hidden="true">
+									</span> 费用记录
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,9 +131,13 @@
                         <th id='gradeName' style="text-align:center;">年级</th>
                         <th id='className' style="text-align:center;" data-options="studentManager.transNull">班级</th>
                         <th id='school' style="text-align:center;" data-options="studentManager.transNull">学校</th>
-                        <th id='telephone' style="text-align:center;" data-options="studentManager.transNull">联系方式</th>
+                        <th id='telephone' style="text-align:center;" data-options="studentManager.transNull">联系方式
+                        </th>
                         <th id='telephoneParent' style="text-align:center;" data-options="studentManager.transNull">
                             父母联系方式
+                        </th>
+                        <th id='fund' style="text-align:center;" data-options="studentManager.transNull">
+                            费用余额（元）
                         </th>
                         <th id="student-operation" style="text-align:center;">操作</th>
                     </tr>
@@ -146,7 +162,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true">&times;</button>
+                            aria-hidden="true">&times;
+                    </button>
                     <h4 class="modal-title" id="myModalLabel">学生设置</h4>
                 </div>
 
@@ -216,6 +233,18 @@
                                            aria-label="...">
                                 </div>
                             </div>
+
+                            <div class="clearfix" style="margin-bottom: 10px;"></div>
+
+                            <div class="col-lg-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 费用余额（元）</span>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="fundNew"
+                                           aria-label="...">
+                                </div>
+                            </div>
                         </div>
                         <div class="clearfix" style="margin-bottom: 10px;"></div>
                     </div>
@@ -229,6 +258,60 @@
                     </button>
                     <button type="button" class="btn btn-primary" onclick="studentManager.update()"
                             id="updateButton">
+                        保存并关闭
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+        <!-- 禁用弹出框结束 -->
+    </div>
+
+    <div class="modal fade" id="myModal4FeeEdit" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title" id="myFeeModalLabel">费用设置</h4>
+                </div>
+
+                <div class="panel-info">
+                    <div class="bootstrap-admin-panel-content">
+                        <div class="row">
+                            <!-- /.col-lg-6 -->
+                            <div class="col-lg-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 姓名 </span>
+                                    <input type="text" class="form-control" id="nameNew4Fee"
+                                           aria-label="..." required message="学生姓名" disabled>
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+                            <div class="col-lg-5">
+                                <button type="button" class="btn btn-primary" onclick="studentManager.modelAddItem()"
+                                        id="addMadel">
+                                    添加
+                                </button>
+                                <!-- /input-group -->
+                            </div>
+                        </div>
+
+                        <div class="clearfix" style="margin-bottom: 10px;"></div>
+                    </div>
+                </div>
+                <div class="panel-info">
+                    <div class="bootstrap-admin-panel-content" id="model_panel">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="studentManager.update4FeeEdit()"
+                            id="updateButton4Fee">
                         保存并关闭
                     </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消
